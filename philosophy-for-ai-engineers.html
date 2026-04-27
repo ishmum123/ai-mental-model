@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Philosophy for AI Engineers &mdash; A Treatise in Nineteen Theorems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  /* ================================================================
+     PALETTE & TYPE — austere philosophy-text vocabulary
+  ================================================================ */
+  :root {
+    --paper:        #ECE6D6;   /* cool stone parchment */
+    --paper-warm:   #E5DEC9;
+    --paper-cold:   #DAD3BE;
+    --ink:          #14121A;   /* deep ink-blue, not pure black */
+    --ink-soft:     #3A3540;
+    --ink-mute:     #7E7466;
+    --ink-faint:    #B0A695;
+    --crimson:      #9E1B22;   /* saturated, refusal */
+    --crimson-soft: #C97A7E;
+    --crimson-bg:   rgba(158, 27, 34, 0.07);
+    --crimson-rule: rgba(158, 27, 34, 0.5);
+    --sage:         #436849;   /* the move forward */
+    --sage-soft:    #8FA890;
+    --sage-bg:      rgba(67, 104, 73, 0.08);
+    --sage-rule:    rgba(67, 104, 73, 0.5);
+    --gold:         #B98C2A;   /* old-paper highlight */
+    --rule:         rgba(20, 18, 26, 0.16);
+    --rule-soft:    rgba(20, 18, 26, 0.08);
+
+    --serif:        'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    --body:         'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+    --mono:         'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: #14121A;
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 380;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern", "liga", "onum", "ss01";
+    overflow: hidden;
+    height: 100vh; width: 100vw;
+  }
+
+  /* ================================================================
+     DECK & SLIDE FRAME
+     A single slide is visible. New slides advance from the right
+     with a subtle tilt that settles. Section breaks page-flip.
+     Pause slides drop from above. The motion vocabulary is:
+       — "reading" (default): tilt-from-right
+       — "section": flip
+       — "pause": drop
+       — "title/close": deep zoom
+     Used sparingly: each motion type has a meaning.
+  ================================================================ */
+  .deck {
+    position: relative;
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    perspective: 2400px;
+    perspective-origin: 50% 50%;
+    transform-style: preserve-3d;
+    background: #14121A;
+  }
+
+  .leaf {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--paper);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.95s cubic-bezier(0.55, 0.05, 0.18, 1),
+      opacity   0.6s cubic-bezier(0.4, 0, 0.4, 1);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+    z-index: 1;
+  }
+
+  .leaf.t-read         { transform: translate3d(58%, 0, -700px) rotateY(-22deg); }
+  .leaf.t-read-back    { transform: translate3d(-58%, 0, -700px) rotateY(22deg); }
+  .leaf.t-flip         { transform: translate3d(0, 0, -800px) rotateY(180deg); }
+  .leaf.t-drop         { transform: translate3d(0, -160%, -200px) rotateX(20deg); }
+  .leaf.t-zoom-far     { transform: translate3d(0, 0, -3200px) scale(0.4); }
+  .leaf.t-settle       { transform: translate3d(0, 8%, -300px) scale(0.94); }
+
+  .leaf.is-active {
+    transform: translate3d(0, 0, 0) rotateY(0) rotateX(0) scale(1);
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 3;
+  }
+
+  .leaf--paper       { background: var(--paper); }
+  .leaf--warm        { background: var(--paper-warm); }
+  .leaf--cold        { background: var(--paper-cold); }
+  .leaf--ink         { background: var(--ink); color: var(--paper); }
+  .leaf--ink .ink-color { color: var(--paper); }
+
+  /* paper grain — extremely subtle */
+  .leaf::before {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 0;
+    background-image:
+      radial-gradient(ellipse at 18% 12%, rgba(255, 251, 240, 0.45) 0%, transparent 55%),
+      radial-gradient(ellipse at 82% 88%, rgba(158, 27, 34, 0.04) 0%, transparent 55%);
+  }
+  .leaf--ink::before {
+    background-image:
+      radial-gradient(ellipse at 22% 18%, rgba(158, 27, 34, 0.18) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(185, 140, 42, 0.07) 0%, transparent 50%);
+  }
+  .deck::after {
+    content: '';
+    position: absolute; inset: 0;
+    pointer-events: none; z-index: 50;
+    opacity: 0.04;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  /* ================================================================
+     PAGE — 16:9 fixed canvas at 1600×900, scaled to viewport
+  ================================================================ */
+  .page {
+    position: relative;
+    width: 1600px; height: 900px;
+    flex-shrink: 0;
+    transform-origin: center center;
+    transition: transform 0.6s cubic-bezier(0.5, 0, 0.2, 1);
+  }
+
+  /* ================================================================
+     RUNNING HEADER & FOOTER — manuscript-style metadata
+  ================================================================ */
+  .runner {
+    position: absolute;
+    left: 96px; right: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    font-weight: 600;
+    z-index: 4;
+  }
+  .runner--top    { top: 64px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  .runner--bottom { bottom: 64px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 10px; }
+  .runner span.dot { color: var(--crimson); padding: 0 8px; }
+  .leaf--ink .runner            { color: rgba(236, 230, 214, 0.45); }
+  .leaf--ink .runner--top       { border-color: rgba(236, 230, 214, 0.18); }
+  .leaf--ink .runner--bottom    { border-color: rgba(236, 230, 214, 0.18); }
+  .leaf--ink .runner span.dot   { color: var(--crimson-soft); }
+
+  .roman {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 500;
+    color: var(--crimson);
+    letter-spacing: 0.04em;
+  }
+  .leaf--ink .roman { color: var(--crimson-soft); }
+
+  /* ================================================================
+     SHARED TYPOGRAPHIC ATOMS
+  ================================================================ */
+  .quote-ornament {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--crimson);
+    line-height: 1;
+  }
+  .therefore {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--sage);
+    font-size: 1.1em;
+  }
+  .qed {
+    display: inline-block;
+    width: 12px; height: 12px;
+    background: var(--ink);
+    margin-left: 8px;
+    transform: translateY(1px);
+  }
+  .leaf--ink .qed { background: var(--paper); }
+
+  .strike {
+    position: relative;
+    color: var(--ink-mute);
+    text-decoration: line-through;
+    text-decoration-color: var(--crimson);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+
+  /* ================================================================
+     TITLE LEAF — § I
+  ================================================================ */
+  .title-grid {
+    position: absolute;
+    inset: 130px 96px 130px 96px;
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+    gap: 48px;
+    z-index: 2;
+  }
+  .title-romanum {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 220px;
+    line-height: 1;
+    color: var(--crimson);
+    letter-spacing: -0.02em;
+    align-self: end;
+  }
+  .title-romanum::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: var(--crimson);
+    margin-top: 16px;
+    width: 70%;
+  }
+  .title-center {
+    align-self: center;
+    text-align: center;
+  }
+  .title-superscript {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 56px;
+  }
+  .title-main {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 138px;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 36px 0;
+  }
+  .title-main em {
+    font-style: italic;
+    color: var(--crimson);
+  }
+  .title-byline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.4;
+    color: var(--ink-soft);
+    margin: 0 auto;
+    max-width: 36ch;
+  }
+  .title-symbol {
+    align-self: end;
+    text-align: right;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 96px;
+    line-height: 1;
+    color: var(--ink-faint);
+  }
+  .title-symbol::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: var(--ink-faint);
+    margin-bottom: 16px;
+    width: 70%;
+    margin-left: 30%;
+  }
+
+  /* ================================================================
+     HOOK LEAF — § II
+     Single dramatic claim; thin vertical rule cleaves "it's a problem"
+     from "it's an old problem."
+  ================================================================ */
+  .hook-grid {
+    position: absolute;
+    inset: 180px 96px 180px 96px;
+    display: grid;
+    grid-template-columns: 1fr 1px 0.65fr;
+    gap: 64px;
+    align-items: center;
+    z-index: 2;
+  }
+  .hook-rule {
+    background: var(--ink);
+    height: 70%;
+    align-self: center;
+    opacity: 0.4;
+  }
+  .hook-claim {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 96px;
+    line-height: 0.98;
+    letter-spacing: -0.018em;
+    margin: 0;
+    color: var(--ink);
+  }
+  .hook-claim em { font-style: italic; color: var(--crimson); }
+  .hook-side {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 30px;
+    line-height: 1.35;
+    color: var(--ink-soft);
+  }
+  .hook-side ul {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .hook-side li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hook-side li:first-child { padding-top: 0; }
+  .hook-side li:last-child { border-bottom: none; }
+
+  /* ================================================================
+     THESIS LEAF — § III
+  ================================================================ */
+  .thesis-grid {
+    position: absolute;
+    inset: 130px 96px 130px 96px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 48px;
+    z-index: 2;
+  }
+  .thesis-claim {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 88px;
+    line-height: 1;
+    letter-spacing: -0.018em;
+    margin: 0;
+    max-width: 24ch;
+  }
+  .thesis-claim em { font-style: italic; color: var(--crimson); }
+  .thesis-mid {
+    font-family: var(--body);
+    font-size: 24px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 60ch;
+    align-self: center;
+  }
+  .thesis-mid strong { font-weight: 600; }
+  .thesis-test {
+    border-top: 2px solid var(--ink);
+    padding: 24px 0 0 0;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .thesis-test-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--sage);
+  }
+  .thesis-test-text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0;
+  }
+  .thesis-test-text em { font-style: normal; color: var(--crimson); }
+
+  /* ================================================================
+     PAUSE LEAF — § IV, § XIV
+     One italic word, large but restrained, surrounded by silence.
+  ================================================================ */
+  .pause-grid {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+  }
+  .pause-stack {
+    text-align: center;
+    position: relative;
+  }
+  .pause-mark {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.6em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .pause-word {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 248px;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    margin: 0;
+  }
+  .pause-word em { color: var(--crimson); }
+  .pause-foot {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.5em;
+    color: var(--ink-mute);
+    margin-top: 36px;
+    text-transform: uppercase;
+  }
+  .pause-bar {
+    height: 1px;
+    width: 80px;
+    background: var(--crimson);
+    margin: 24px auto 0 auto;
+    opacity: 0.5;
+  }
+
+  /* ================================================================
+     TERRAIN LEAF — § V
+     A three-row ledger of the territory.
+  ================================================================ */
+  .terrain-grid {
+    position: absolute;
+    inset: 130px 96px 130px 96px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 32px;
+    z-index: 2;
+  }
+  .terrain-head .terrain-title {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 1;
+    letter-spacing: -0.018em;
+    margin: 0 0 14px 0;
+    max-width: 24ch;
+  }
+  .terrain-head .terrain-title em { font-style: italic; color: var(--crimson); }
+  .terrain-head p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .ledger {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .ledger-row {
+    display: grid;
+    grid-template-columns: 0.95fr 1.6fr 1fr;
+    gap: 36px;
+    align-items: start;
+    padding: 26px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ledger-row:last-child { border-bottom: none; }
+  .ledger-area {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-style: italic;
+    line-height: 1.15;
+    color: var(--ink);
+  }
+  .ledger-area em { color: var(--crimson); }
+  .ledger-area .roman-ref {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-style: normal;
+    margin-top: 10px;
+  }
+  .ledger-form {
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .ledger-philosophers {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--ink);
+    border-left: 1px solid var(--crimson);
+    padding-left: 16px;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* ================================================================
+     CONCEPT LEAF — § VI through § XIII, § XV through § XVII
+     The dialectical cleave: claim above; common-sense intuition
+     (struck through) on the left, philosophical move on the right.
+  ================================================================ */
+  .concept-grid {
+    position: absolute;
+    inset: 120px 96px 120px 96px;
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 28px;
+    z-index: 2;
+  }
+  .concept-head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .concept-romanum {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 56px;
+    line-height: 1;
+    color: var(--crimson);
+    letter-spacing: -0.01em;
+  }
+  .concept-tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-mute);
+  }
+  .concept-tag b { color: var(--crimson); font-weight: 700; }
+  .concept-citation {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink);
+    text-align: right;
+  }
+  .concept-citation .year {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    color: var(--ink-mute);
+    display: block;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  .concept-claim {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+    margin: 0;
+    color: var(--ink);
+    max-width: 28ch;
+  }
+  .concept-claim em { font-style: italic; color: var(--crimson); }
+
+  /* The cleave */
+  .cleave {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 0;
+    align-items: stretch;
+    border-top: 1px solid var(--rule);
+    padding-top: 28px;
+  }
+  .cleave-col { padding: 0 36px; }
+  .cleave-col:first-child { padding-left: 0; }
+  .cleave-col:last-child  { padding-right: 0; }
+  .cleave-rule { background: var(--ink); opacity: 0.18; }
+
+  .cleave-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .cleave-label--no  { color: var(--crimson); }
+  .cleave-label--yes { color: var(--sage); }
+  .cleave-mark--no::before {
+    content: '×';
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--crimson);
+    letter-spacing: 0;
+  }
+  .cleave-mark--yes::before {
+    content: '∴';
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--sage);
+    letter-spacing: 0;
+  }
+
+  .cleave-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 28px;
+    line-height: 1.15;
+    color: var(--ink);
+    margin: 0 0 16px 0;
+    font-weight: 500;
+  }
+  .cleave-col--no .cleave-title { color: var(--ink-soft); }
+
+  .cleave-text {
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+  }
+  .cleave-text + .cleave-text { margin-top: 10px; }
+  .cleave-text em { font-style: italic; }
+  .cleave-text strong { font-weight: 600; }
+  .cleave-text code {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: rgba(20, 18, 26, 0.07);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .cleave-col--no .cleave-text { color: var(--ink-soft); }
+  .cleave-col--no .cleave-text strong { color: var(--ink); }
+  .cleave-col--yes .cleave-text strong { color: var(--sage); }
+
+  .cleave-text ul { margin: 8px 0 0; padding-left: 22px; }
+  .cleave-text li { margin-bottom: 6px; }
+  .cleave-text li:last-child { margin-bottom: 0; }
+
+  /* The "idea" plate — sits below the claim, narrower, like a citation pull-out */
+  .concept-idea {
+    background: rgba(20, 18, 26, 0.04);
+    border-left: 3px solid var(--ink);
+    padding: 18px 22px;
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 18px 0;
+  }
+  .concept-idea-label {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .concept-idea em { font-style: italic; }
+  .concept-idea strong { font-weight: 600; }
+  .concept-idea code {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: rgba(20, 18, 26, 0.08);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+
+  /* ================================================================
+     UNIFY LEAF — § XVIII
+     Inverted: dark ink ground, paper text. The argument lands.
+  ================================================================ */
+  .unify-grid {
+    position: absolute;
+    inset: 130px 96px 130px 96px;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 48px;
+    z-index: 2;
+  }
+  .unify-claim {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: 116px;
+    line-height: 0.95;
+    letter-spacing: -0.022em;
+    margin: 0;
+    max-width: 22ch;
+    color: var(--paper);
+  }
+  .unify-claim em {
+    font-style: italic;
+    color: var(--crimson-soft);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 14px;
+    text-decoration-color: var(--crimson);
+  }
+  .unify-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-self: end;
+  }
+  .unify-body p {
+    font-family: var(--body);
+    font-size: 21px;
+    line-height: 1.6;
+    color: rgba(236, 230, 214, 0.85);
+    margin: 0 0 16px 0;
+  }
+  .unify-body p strong {
+    color: var(--paper);
+    font-weight: 600;
+  }
+  .unify-body p em { font-style: italic; color: var(--crimson-soft); }
+  .unify-callout {
+    border-left: 2px solid var(--sage-soft);
+    padding: 18px 24px;
+    background: rgba(67, 104, 73, 0.18);
+    font-family: var(--body);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--paper);
+  }
+  .unify-callout span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--sage-soft);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .unify-callout em { font-style: italic; color: var(--sage-soft); }
+
+  /* ================================================================
+     CLOSE LEAF — § XIX (Monday morning)
+  ================================================================ */
+  .close-grid {
+    position: absolute;
+    inset: 110px 96px 110px 96px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    gap: 28px;
+    z-index: 2;
+  }
+  .close-head .close-title {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 84px;
+    line-height: 1;
+    letter-spacing: -0.018em;
+    margin: 0 0 12px 0;
+    color: var(--ink);
+  }
+  .close-head .close-title em {
+    color: var(--crimson);
+    font-style: italic;
+  }
+  .close-head .close-sub {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .corollary {
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+  }
+  .corollary-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 1.8fr;
+    gap: 28px;
+    align-items: start;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .corollary-row:last-child { border-bottom: none; }
+  .corollary-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--crimson);
+    line-height: 1.2;
+  }
+  .corollary-philosopher {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+  .corollary-philosopher span {
+    display: block;
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.32em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-top: 4px;
+  }
+  .corollary-action {
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+  .corollary-action em { font-style: italic; color: var(--crimson); }
+  .corollary-action code {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: rgba(20, 18, 26, 0.07);
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .close-foot {
+    text-align: center;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 32px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .close-foot::before, .close-foot::after {
+    content: '\2003\2014\2003';
+    color: var(--crimson);
+    opacity: 0.6;
+    font-style: normal;
+  }
+
+  /* ================================================================
+     SPEAKER NOTES OVERLAY
+  ================================================================ */
+  [data-notes] { display: none; }
+
+  .notes {
+    position: fixed;
+    left: 24px; right: 24px; bottom: 24px;
+    padding: 16px 22px;
+    background: rgba(20, 18, 26, 0.97);
+    color: rgba(236, 230, 214, 0.92);
+    border-left: 3px solid var(--crimson);
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.55;
+    font-style: italic;
+    box-shadow: 0 -10px 40px rgba(20, 18, 26, 0.4);
+    transform: translateY(calc(100% + 32px));
+    transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+    z-index: 100;
+    max-height: 38vh;
+    overflow-y: auto;
+  }
+  .notes-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--crimson-soft);
+    font-weight: 700;
+    font-style: normal;
+    display: block;
+    margin-bottom: 8px;
+  }
+  body.notes-on .notes { transform: translateY(0); }
+  .notes em { font-style: italic; }
+  .notes code {
+    font-family: var(--mono);
+    background: rgba(236, 230, 214, 0.12);
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-style: normal;
+  }
+
+  /* ================================================================
+     HUD — restrained corner indicator
+  ================================================================ */
+  .hud {
+    position: fixed;
+    bottom: 22px; right: 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    z-index: 90;
+    background: rgba(236, 230, 214, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    font-feature-settings: "tnum";
+    font-weight: 600;
+  }
+  .hud .roman-now {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--crimson);
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  .hud .hud-num strong {
+    color: var(--crimson);
+    font-weight: 700;
+  }
+  .hud .hud-keys { opacity: 0.7; font-weight: 500; letter-spacing: 0.15em; }
+  body.notes-on .hud {
+    background: rgba(20, 18, 26, 0.9);
+    color: rgba(236, 230, 214, 0.7);
+    border-color: rgba(236, 230, 214, 0.2);
+  }
+  body.notes-on .hud .roman-now,
+  body.notes-on .hud .hud-num strong {
+    color: var(--crimson-soft);
+  }
+
+  /* ================================================================
+     PRINT
+  ================================================================ */
+  @media print {
+    html, body { background: white; overflow: visible; height: auto; }
+    .deck { overflow: visible; height: auto; }
+    .leaf {
+      position: relative;
+      opacity: 1 !important;
+      pointer-events: auto !important;
+      page-break-after: always;
+      height: 100vh;
+      transform: none !important;
+    }
+    .page { transform: scale(0.92); }
+    .notes, .hud { display: none; }
+    .deck::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<main class="deck" id="deck">
+
+  <!-- =========================================================
+       § I  ·  TITLE
+  ========================================================= -->
+  <section class="leaf is-active t-zoom-far" data-leaf="1" data-mode="title">
+    <div class="page">
+      <div class="title-grid">
+        <div class="title-romanum">I</div>
+        <div class="title-center">
+          <div class="title-superscript">A treatise in nineteen theorems</div>
+          <h1 class="title-main">Philosophy<br>for AI <em>Engineers</em></h1>
+          <p class="title-byline">Why 250-year-old ideas predict your daily AI failures &mdash; and what to do about it.</p>
+        </div>
+        <div class="title-symbol">&para;</div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>Lecture &middot; thirty-five minutes &middot; two pushback pauses</span>
+        <span>Old books<span class="dot">·</span>new bugs</span>
+      </div>
+    </div>
+    <div data-notes>
+      Don't preamble. The audience builds with LLMs daily. The claim is strong: <em>most AI failures are not engineering failures &mdash; they are conceptual-hygiene failures, predicted, sometimes centuries ago, by people you didn't read in school.</em>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § II  ·  THE HOOK
+  ========================================================= -->
+  <section class="leaf t-read" data-leaf="2">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ II</span><span class="dot">·</span>Part I &middot; The Hook</span>
+        <span>02 / 19</span>
+      </div>
+      <div class="hook-grid">
+        <h2 class="hook-claim">Every fundamental AI problem you hit, a <em>philosopher</em> already mapped.</h2>
+        <div class="hook-rule"></div>
+        <div class="hook-side">
+          <ul>
+            <li>Hallucination.</li>
+            <li>Misalignment.</li>
+            <li>Drift.</li>
+            <li>Sycophancy.</li>
+            <li>Spec failure.</li>
+          </ul>
+          <p style="margin-top: 28px; font-size: 22px; color: var(--crimson);">None of it is new.</p>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>The Hook</span>
+        <span>&larr; &rarr; to advance</span>
+      </div>
+    </div>
+    <div data-notes>
+      Half right and half misleading. The structural problems <em>are</em> old. But most "philosophy for engineers" content is intellectual decoration. The version that earns its keep gives you a <em>specific action common sense would not have produced</em>. That is the bar for everything that follows.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § III  ·  THESIS &amp; TEST
+  ========================================================= -->
+  <section class="leaf leaf--warm t-read" data-leaf="3">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ III</span><span class="dot">·</span>Part I &middot; The Thesis &amp; The Test</span>
+        <span>03 / 19</span>
+      </div>
+      <div class="thesis-grid">
+        <h2 class="thesis-claim">Most AI failures are not engineering failures.<br>They are <em>conceptual-hygiene</em> failures.</h2>
+        <p class="thesis-mid">Engineers without philosophical training are <strong>systematically vulnerable</strong> to a small set of predictable errors. The errors have names. They have known fixes. The fixes are not obvious from common sense.</p>
+        <div class="thesis-test">
+          <div class="thesis-test-label">The test we apply</div>
+          <p class="thesis-test-text">Does the idea give you a <em>specific action</em> you couldn't have arrived at by sheer common sense? If not, the philosophy isn't earning its keep. If yes, it is load-bearing.</p>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>Thesis &amp; Test</span>
+        <span>N for notes &middot; F for fullscreen</span>
+      </div>
+    </div>
+    <div data-notes>
+      The test is the rhetorical spine of the whole talk. Each concept that follows passes it. Anything that didn't has been cut.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § IV  ·  PUSHBACK PAUSE I
+  ========================================================= -->
+  <section class="leaf leaf--ink t-drop" data-leaf="4">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ IV</span><span class="dot">·</span>Pause &middot; ~ 2 minutes</span>
+        <span>04 / 19</span>
+      </div>
+      <div class="pause-grid">
+        <div class="pause-stack">
+          <div class="pause-mark">Interlude</div>
+          <h2 class="pause-word"><em>Pushback?</em></h2>
+          <div class="pause-bar"></div>
+          <div class="pause-foot">Take it</div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>The Hook ends here</span>
+        <span>&rarr; to continue</span>
+      </div>
+    </div>
+    <div data-notes>
+      Common objections to surface if not raised: <em>"isn't this just smart-sounding repackaging?"</em> &mdash; counter: the test answers that. <em>"Isn't this the LinkedIn-post genre?"</em> &mdash; yes, but the LinkedIn post stops at analogy; we are going to actions. Resist defending; let the audience poke at the test.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § V  ·  TERRAIN
+  ========================================================= -->
+  <section class="leaf t-flip" data-leaf="5" data-mode="section">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ V</span><span class="dot">·</span>Part II &middot; The Terrain</span>
+        <span>05 / 19</span>
+      </div>
+      <div class="terrain-grid">
+        <div class="terrain-head">
+          <h2 class="terrain-title">Three problem areas. <em>One unifying mistake.</em></h2>
+          <p>The mistake: believing meaning can be transmitted through words alone.</p>
+        </div>
+        <div class="ledger">
+          <div class="ledger-row">
+            <div class="ledger-area"><em>Hallucination</em><br>&amp; truth<span class="roman-ref">§ VI &mdash; § IX</span></div>
+            <div class="ledger-form">Made-up citations, invented APIs, confident wrong answers, hallucinated function arguments &mdash; all the ways a model produces well-formed text that doesn't refer to anything.</div>
+            <div class="ledger-philosophers">FRANKFURT<br>FREGE<br>PLATO<br>HUME</div>
+          </div>
+          <div class="ledger-row">
+            <div class="ledger-area"><em>Instruction</em><br>&amp; meaning transfer<span class="roman-ref">§ X &mdash; § XIII</span></div>
+            <div class="ledger-form">Spec drift, prompt failure, "the model didn't do what I wanted," runaway agentic behavior &mdash; all the ways meaning fails to land between you and the model.</div>
+            <div class="ledger-philosophers">WITTGENSTEIN &times; 3<br>POLANYI</div>
+          </div>
+          <div class="ledger-row">
+            <div class="ledger-area"><em>Judgment</em><br>&amp; values<span class="roman-ref">§ XV &mdash; § XVII</span></div>
+            <div class="ledger-form">Sycophancy, eval gaming, oversight burden, drift under autonomy, modal answers passed off as best &mdash; all the ways values and tradeoffs get smuggled or lost.</div>
+            <div class="ledger-philosophers">HUME &amp; MOORE<br>ARISTOTLE<br>GOODHART</div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>The Terrain</span>
+        <span>10 ideas &middot; 1 through-line</span>
+      </div>
+    </div>
+    <div data-notes>
+      Three clusters, ten ideas, one through-line. Hold the through-line as scaffolding; individual ideas hang off it. Don't promise it &mdash; <em>show</em> it by the end.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § VI  ·  FRANKFURT
+  ========================================================= -->
+  <section class="leaf t-read" data-leaf="6">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ VI</span><span class="dot">·</span>Hallucination &middot; 1 of 4</span>
+        <span>06 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">VI</span>
+          <span class="concept-tag">On <b>Bullshit</b> &mdash; the master concept</span>
+          <span class="concept-citation">Harry Frankfurt, <em>On&nbsp;Bullshit</em><span class="year">1986</span></span>
+        </div>
+        <h2 class="concept-claim">An LLM is not a liar. It is a <em>bullshitter</em>, in Frankfurt's technical sense.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            A <em>liar</em> knows the truth and says the opposite &mdash; they care about truth, just inversely. A <em>bullshitter</em> doesn't care about truth at all; they say whatever serves their purpose, indifferent to truth or falsity. Frankfurt's strong claim: <strong>bullshit is worse than lying</strong>, because the bullshitter has no orientation toward truth whatsoever. An LLM is structurally a bullshitter &mdash; not by malice, by construction.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"It's a knowledgeable assistant that occasionally makes mistakes."</span></h3>
+              <p class="cleave-text">This frame assumes the model is <em>trying</em> to be truthful and sometimes failing. It isn't trying. There is no trying.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Treat every output as bullshit until externally verified.</h3>
+              <p class="cleave-text"><strong>Your job is to supply truth-orientation</strong>, because the model has none. RAG, search, code execution, citation lookup &mdash; not tricks. They are the only sources of truth-orientation in the loop.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>VI &middot; Frankfurt</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      The master concept of the talk. If the audience leaves with one frame change, this is it. <em>"Bullshit"</em> is technical here, not an insult &mdash; Frankfurt uses it precisely. Restate that so it doesn't read as cheap.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § VII  ·  FREGE
+  ========================================================= -->
+  <section class="leaf leaf--warm t-read" data-leaf="7">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ VII</span><span class="dot">·</span>Hallucination &middot; 2 of 4</span>
+        <span>07 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">VII</span>
+          <span class="concept-tag">Why citations and APIs hallucinate <b>specifically</b></span>
+          <span class="concept-citation">Gottlob Frege, <em>&Uuml;ber Sinn&nbsp;und Bedeutung</em><span class="year">1892</span></span>
+        </div>
+        <h2 class="concept-claim">Form is what's reliable. <em>Reference</em> is what isn't.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            <strong>Sense</strong> (<em>Sinn</em>) is the conceptual content &mdash; what kind of thing a word picks out. <strong>Reference</strong> (<em>Bedeutung</em>) is the actual thing in the world. "The current king of France" has perfectly good <em>sense</em> and no <em>reference</em>. LLMs operate almost entirely at the sense level. A hallucinated citation has the <em>sense</em> of a citation in this domain &mdash; right author shape, right journal, right year &mdash; with no reference to any actual paper.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">A well-formed citation is evidence of a real referent.</span></h3>
+              <p class="cleave-text">The opposite is true. <strong>Form is exactly what's reliable in LLM output, and reference is exactly what isn't.</strong></p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Treat every referring expression as <em>sense without reference</em> until checked.</h3>
+              <p class="cleave-text">Citations: look them up. APIs: try them. Versions: verify. <strong>The verification step <em>is</em> the reference relation</strong> &mdash; without it, you have form without anchor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>VII &middot; Frege</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      Explains why hallucinations cluster around <em>specific kinds of content</em>: anything that names a particular real-world entity. The model is fine at conceptual answers because those live entirely at the sense level. Hallucination shows up where reference is required.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § VIII  ·  PLATO
+  ========================================================= -->
+  <section class="leaf t-read" data-leaf="8">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ VIII</span><span class="dot">·</span>Hallucination &middot; 3 of 4</span>
+        <span>08 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">VIII</span>
+          <span class="concept-tag">Right opinion <b>vs</b> knowledge</span>
+          <span class="concept-citation">Plato, <em>Meno</em><span class="year">~ 380 BCE</span></span>
+        </div>
+        <h2 class="concept-claim">Even when it's right, it isn't <em>knowledge</em>.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            Plato distinguishes <em>right opinion</em> (true belief without justification) from <em>knowledge</em> &mdash; true belief with <em>logos</em>, an account. The road-to-Larissa example: a man who happens to know the right way gives correct directions &mdash; but if he can't tell you <em>why</em>, you're depending on luck. LLMs produce right opinion. Even when correct, output has no traceable justification. Tokens like that follow tokens like the prompt.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"It's been right ten times in a row, so I trust it."</span></h3>
+              <p class="cleave-text">Ten right opinions don't add up to knowledge. They are ten lucky bets. The eleventh prompt is a fresh roll.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Demand the <em>logos</em>.</h3>
+              <p class="cleave-text">After any non-trivial answer, ask: <em>"What would have to be true for this to be wrong, and what's the strongest evidence against it?"</em> Answers that fold immediately are right opinion at best. Answers that hold up are closer to knowledge.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>VIII &middot; Plato</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      Larissa example is from the <em>Meno</em>, not the <em>Theaetetus</em> &mdash; minor philological note. Main move: trustworthiness comes from justification structure, not past correctness.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § IX  ·  HUME (induction)
+  ========================================================= -->
+  <section class="leaf leaf--warm t-read" data-leaf="9">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ IX</span><span class="dot">·</span>Hallucination &middot; 4 of 4</span>
+        <span>09 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">IX</span>
+          <span class="concept-tag">Confidence <b>is not</b> calibration</span>
+          <span class="concept-citation">David Hume, <em>A Treatise of Human Nature</em><span class="year">1739</span></span>
+        </div>
+        <h2 class="concept-claim">Confidence is a <em>stylistic feature</em>. Not a signal.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            All inductive inference &mdash; projecting past patterns onto future cases &mdash; is unjustified by reason alone. We project frequencies because of "custom and habit," not logic. LLMs are pure inductive engines. Their expressed confidence is inherited from <em>confident-sounding text in the training data</em>, not a calibrated internal probability. Tone and accuracy are uncorrelated except by accident.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">Confident output gets more trust; hedged output gets less.</span></h3>
+              <p class="cleave-text">Reading model tone as a calibration signal. The correlation is essentially zero.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Discount stated confidence to roughly zero.</h3>
+              <p class="cleave-text">Build confidence externally: multiple generations, stability checks, ground-truth comparison. Ask for <em>evidence</em>, not for <em>confidence</em>. <em>"What's the evidence?"</em> triggers a different generation pattern than <em>"are you sure?"</em></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>IX &middot; Hume</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      The <em>"are you sure?"</em> vs <em>"what's the evidence?"</em> distinction is a small concrete shift the audience can do tomorrow. Both prompts well-formed; one produces grounding behavior, the other produces more confident-sounding tokens.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § X  ·  WITTGENSTEIN — RULE-FOLLOWING
+  ========================================================= -->
+  <section class="leaf t-read" data-leaf="10">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ X</span><span class="dot">·</span>Instruction &middot; 1 of 4</span>
+        <span>10 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">X</span>
+          <span class="concept-tag">No prompt <b>uniquely determines</b> its output</span>
+          <span class="concept-citation">Wittgenstein, <em>Philosophical Investigations</em> &sect; 201<span class="year">1953</span></span>
+        </div>
+        <h2 class="concept-claim">No spec, however clear, can <em>uniquely determine</em> its application.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            Show someone <code>2, 4, 6, 8</code> and say "continue the pattern." They write 10, 12, 14. But <em>"add 2 each step until step 100, then jump to 1000"</em> also fits. Nothing in the rule itself rules out the second reading. What makes the first reading <em>obvious</em> is shared background &mdash; what Wittgenstein calls a <strong>"form of life."</strong> The model has a different form of life. It fills the gaps with training-distribution averages.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"If the spec is clear enough, output will match."</span></h3>
+              <p class="cleave-text">Unreachable in principle &mdash; not because specs are sloppy, but because no spec determines its application uniquely.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Stop writing <em>longer</em> prompts. Write prompts with <em>concrete examples</em>.</h3>
+              <p class="cleave-text">Two or three (input&nbsp;&rarr;&nbsp;desired output) pairs do more than two paragraphs. This is the philosophical reason few-shot prompting works.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>X &middot; Wittgenstein I</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      The 2-4-6-8 example is the cleanest version. Engineers tend to think they can tighten the spec until unambiguous. Wittgenstein's argument is that this is structurally impossible. Examples carry shared form-of-life that prose cannot.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XI  ·  WITTGENSTEIN — PRIVATE LANGUAGE
+  ========================================================= -->
+  <section class="leaf leaf--warm t-read" data-leaf="11">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XI</span><span class="dot">·</span>Instruction &middot; 2 of 4</span>
+        <span>11 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">XI</span>
+          <span class="concept-tag">Alignment requires <b>public criteria</b></span>
+          <span class="concept-citation">Wittgenstein, <em>P.I.</em> &sect; 243&ndash;271<span class="year">1953</span></span>
+        </div>
+        <h2 class="concept-claim">"Be helpful" is <em>not</em> a specification.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            No "internal state" word has meaning without publicly checkable criteria of correctness. A purely private sensation, with no public criteria, would be a word that can't be used correctly or incorrectly &mdash; even by its inventor. Most system prompts are written in internal-state vocabulary: <em>be helpful, be thoughtful, care about the user, be honest, be balanced</em>. None has public criteria the model (or anyone) can check against. They are alignment <strong>vibes</strong>, not specs.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">Internal-state instructions feel like instructing a person.</span></h3>
+              <p class="cleave-text">They produce vague, drifting behavior because the words don't denote anything checkable.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Rewrite alignment as <em>publicly checkable behavior</em>.</h3>
+              <p class="cleave-text">
+                <ul>
+                  <li><em>"Be helpful"</em>&nbsp;&rarr;&nbsp;"When the request is task-shaped, respond with at least one specific actionable next step."</li>
+                  <li><em>"Be honest"</em>&nbsp;&rarr;&nbsp;"Cite a source for any factual claim. Label uncertainty explicitly."</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>XI &middot; Wittgenstein II</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      This single move &mdash; rewriting alignment in public-criteria form &mdash; takes most teams from RLHF-flavored vibes to actually testable specifications. Most engineers don't see that <em>"be helpful"</em> is structurally empty.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XII  ·  WITTGENSTEIN — FAMILY RESEMBLANCE
+  ========================================================= -->
+  <section class="leaf t-read" data-leaf="12">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XII</span><span class="dot">·</span>Instruction &middot; 3 of 4</span>
+        <span>12 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">XII</span>
+          <span class="concept-tag">Spec by paradigm <b>+</b> boundary</span>
+          <span class="concept-citation">Wittgenstein, <em>P.I.</em> &sect; 65&ndash;71<span class="year">1953</span></span>
+        </div>
+        <h2 class="concept-claim">Most concepts have no <em>essence</em>. Spec by paradigm + boundary.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            Most natural-language concepts &mdash; <em>game, chair, spam, toxic, helpful, harmful</em> &mdash; have no necessary-and-sufficient defining conditions. They have overlapping <strong>family resemblances</strong>. There is no shared essence. Trying to define such concepts produces edges that fail: too narrow (misses cases) or too broad (catches innocents). Then come the exceptions. Then the swamp.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"Just write a clear definition."</span></h3>
+              <p class="cleave-text">Every spec, classifier, and content policy that tries to define collapses at the boundary. The definitional approach is the wrong shape for the problem.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Replace each definition with <em>three sets</em>.</h3>
+              <p class="cleave-text">
+                <ul>
+                  <li><strong>Paradigm cases</strong> &mdash; clear yes.</li>
+                  <li><strong>Paradigm non-cases</strong> &mdash; clear no.</li>
+                  <li><strong>Boundary cases</strong> &mdash; with explicit rulings.</li>
+                </ul>
+              </p>
+              <p class="cleave-text" style="margin-top: 10px;">Calibrate against paradigms; debate only at the boundary.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>XII &middot; Wittgenstein III</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      Ask: <em>how is "spam" defined at your company?</em> If the answer is a sentence, it's already broken. If it's "here are canonical yes/no examples plus rulings on close cases," that's family-resemblance spec, and it works.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XIII  ·  POLANYI
+  ========================================================= -->
+  <section class="leaf leaf--warm t-read" data-leaf="13">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XIII</span><span class="dot">·</span>Instruction &middot; 4 of 4</span>
+        <span>13 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">XIII</span>
+          <span class="concept-tag">Tacit knowledge &mdash; the <b>silent</b> half</span>
+          <span class="concept-citation">Michael Polanyi, <em>The Tacit Dimension</em><span class="year">1966</span></span>
+        </div>
+        <h2 class="concept-claim">Your standards contain things <em>you cannot articulate</em>.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            <em>"We can know more than we can tell."</em> Every skilled person carries knowledge they cannot put into words &mdash; what a good PR looks like, when a system smells off, when a design is over-engineered. This is <strong>tacit knowledge</strong>. It transfers only through proximity, examples, and correction. It is structurally invisible to the prompt-writer at prompt-writing time.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"If we write the prompt well enough, the model will do exactly what we want."</span></h3>
+              <p class="cleave-text">Fails at the edges, because your standard contains tacit pieces <em>you cannot articulate by definition</em>. If you could, you already would have.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Budget for <em>multi-turn iteration</em>. The corrections are the training.</h3>
+              <p class="cleave-text">The model learns your tacit standard from <strong>your corrections across turns</strong> &mdash; not from the initial prompt. One-shot only works for tasks whose standard is fully articulable. Rare.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>XIII &middot; Polanyi</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      Polanyi connects directly to Wittgenstein on rule-following. Same point, different vocabulary: full articulation isn't possible; shared background or correction is the missing carrier. The action point &mdash; <em>budget for multi-turn</em> &mdash; is the most universally useful in the talk.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XIV  ·  PUSHBACK PAUSE II
+  ========================================================= -->
+  <section class="leaf leaf--ink t-drop" data-leaf="14">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XIV</span><span class="dot">·</span>Pause &middot; ~ 3 minutes</span>
+        <span>14 / 19</span>
+      </div>
+      <div class="pause-grid">
+        <div class="pause-stack">
+          <div class="pause-mark">Interlude</div>
+          <h2 class="pause-word"><em>Pushback?</em></h2>
+          <div class="pause-bar"></div>
+          <div class="pause-foot">Take it &middot; harder this time</div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>Instruction ends here</span>
+        <span>&rarr; to continue</span>
+      </div>
+    </div>
+    <div data-notes>
+      Likely pushback: <em>"isn't this just rebranding things engineers already know?"</em> &mdash; counter: name the action, ask whether they were doing it. <em>"Wittgenstein is overkill for prompting"</em> &mdash; counter: yes, until you've seen the family-resemblance fix vs. the definition swamp.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XV  ·  HUME &amp; MOORE
+  ========================================================= -->
+  <section class="leaf t-flip" data-leaf="15" data-mode="section">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XV</span><span class="dot">·</span>Part III &middot; Judgment &middot; 1 of 3</span>
+        <span>15 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">XV</span>
+          <span class="concept-tag">Is &nbsp;<b>&ne;</b>&nbsp; ought &middot; typical &nbsp;<b>&ne;</b>&nbsp; good</span>
+          <span class="concept-citation">Hume (1739) &middot; Moore (1903)<span class="year">is-ought &middot; naturalistic fallacy</span></span>
+        </div>
+        <h2 class="concept-claim">The model has no values. It has only <em>averages</em>.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">Two arguments, one move</span>
+            <strong>Hume:</strong> you cannot derive an <em>ought</em> from an <em>is</em>. <strong>Moore:</strong> the typical and the natural are not the same as the good &mdash; that substitution is a category error. LLMs are pure <em>is</em> machines: statistical averages. Every "should" they output is laundered values &mdash; whichever <em>ought</em> had the strongest gradient signal in RLHF. "Best practices" they cite are <em>modal</em> practices, not best ones.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"Should I take this job?" "What's the best way to X?"</span></h3>
+              <p class="cleave-text">Treated as neutral analysis. They cannot be neutral; they cannot even be best. They are average values applied to average practice.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Name the value frame. Ask for <em>excellent</em>, not "best."</h3>
+              <p class="cleave-text"><strong>Normative:</strong> name the value frame in the prompt. Without it, you've outsourced ethics to RLHF averages.<br><strong>"Best practice":</strong> ask for <em>excellent contrasted with typical</em>. Forces the model out of modal generation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>XV &middot; Hume &amp; Moore</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      The slide that carries the value-laundering point engineers are most blind to. Explains both why LLMs feel "balanced" (RLHF averages) and why their advice is mediocre by default (modal not excellent).
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XVI  ·  ARISTOTLE
+  ========================================================= -->
+  <section class="leaf leaf--warm t-read" data-leaf="16">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XVI</span><span class="dot">·</span>Judgment &middot; 2 of 3</span>
+        <span>16 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">XVI</span>
+          <span class="concept-tag"><b>Phron&#x113;sis</b> &middot; the autonomy-vs-drift solution</span>
+          <span class="concept-citation">Aristotle, <em>Nicomachean Ethics</em>, Bk VI<span class="year">~ 340 BCE</span></span>
+        </div>
+        <h2 class="concept-claim">There is no shortcut. Cultivate <em>phron&#x113;sis</em>.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            <em>Phron&#x113;sis</em> (practical wisdom) is the ability to make the right call in a particular situation when the rules don't fully tell you what to do. Aristotle's claim: it cannot be taught by lecture or rulebook. It develops only through <strong>repeated practice combined with feedback from someone who already has it.</strong>
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense (two failure modes)</div>
+              <h3 class="cleave-title"><span class="strike">A: Confirm everything. &nbsp;|&nbsp; B: "You decide."</span></h3>
+              <p class="cleave-text"><strong>A &mdash; Micromanagement:</strong> doesn't scale. <strong>B &mdash; Full autonomy:</strong> causes drift; small misalignments compound. Neither works.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Graduated autonomy. Feedback as <em>reasons</em>, not corrections.</h3>
+              <p class="cleave-text">Agent decides. You sample. Feedback gives the <em>principle</em>, not the patch. Encode the principle into the next prompt. Eval-and-iterate loops <strong>are</strong> phron&#x113;sis cultivation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>XVI &middot; Aristotle</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      Resolves the most painful daily tension &mdash; the manager-engineer-AI triangle where everyone is over-checking or under-aligning. Aristotle's honest answer: there is no shortcut, but there <em>is</em> a method. Reasons, not corrections.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XVII  ·  GOODHART
+  ========================================================= -->
+  <section class="leaf t-read" data-leaf="17">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XVII</span><span class="dot">·</span>Judgment &middot; 3 of 3</span>
+        <span>17 / 19</span>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-head">
+          <span class="concept-romanum">XVII</span>
+          <span class="concept-tag">When the measure becomes the <b>target</b></span>
+          <span class="concept-citation">Charles Goodhart<span class="year">1975 &middot; with roots in Wittgenstein</span></span>
+        </div>
+        <h2 class="concept-claim">Every eval, optimized hard enough, becomes a <em>lie</em>.</h2>
+        <div>
+          <div class="concept-idea">
+            <span class="concept-idea-label">The argument</span>
+            <em>"When a measure becomes a target, it ceases to be a good measure."</em> The instant a metric becomes the optimization target, behavior optimizes for the metric &mdash; not for what the metric was supposed to capture. RLHF is the canonical case: optimize for "human-preferred response," get sycophancy. Same mechanism as Wittgenstein's rule-following &mdash; metric underdetermines intent; optimization fills the gap.
+          </div>
+          <div class="cleave">
+            <div class="cleave-col cleave-col--no">
+              <div class="cleave-label cleave-label--no cleave-mark--no">&nbsp;Common sense</div>
+              <h3 class="cleave-title"><span class="strike">"Just measure it precisely."</span></h3>
+              <p class="cleave-text">The precise measurement <em>becomes</em> the new target. Optimization gradually pulls behavior away from intent &mdash; including in ways you can't see, because the metric still looks good.</p>
+            </div>
+            <div class="cleave-rule"></div>
+            <div class="cleave-col cleave-col--yes">
+              <div class="cleave-label cleave-label--yes cleave-mark--yes">&nbsp;The move</div>
+              <h3 class="cleave-title">Rotate evals. Distrust long-running ones by default.</h3>
+              <p class="cleave-text">
+                <ul>
+                  <li>Don't make a single eval the target. Use multiple loosely-correlated checks.</li>
+                  <li><strong>Rotate evals.</strong> Hold some out. Audit by hand.</li>
+                  <li>Assume any eval optimized hard for six months has been gamed.</li>
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>XVII &middot; Goodhart</span>
+        <span>&larr; &rarr;</span>
+      </div>
+    </div>
+    <div data-notes>
+      Tie back to Wittgenstein: Goodhart is a special case of rule-following. Eval underdetermines intent; optimization finds a satisfying continuation that drifts. Every eval is a 2-4-6-8 sequence &mdash; many continuations fit it.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XVIII  ·  THE UNIFYING PATTERN
+  ========================================================= -->
+  <section class="leaf leaf--ink t-flip" data-leaf="18" data-mode="section">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XVIII</span><span class="dot">·</span>The Pattern</span>
+        <span>18 / 19</span>
+      </div>
+      <div class="unify-grid">
+        <h2 class="unify-claim">Meaning cannot be transmitted by <em>words alone</em>.</h2>
+        <div class="unify-body">
+          <div>
+            <p>Every concept in this talk is a face of the same mistake. Common sense treats language and categories as <strong>naturally precise</strong>.</p>
+            <p>Almost every philosophical tradition that has survived 200&nbsp;+&nbsp;years assumes the opposite &mdash; these things are inherently vague, value-laden, or context-dependent.</p>
+            <p><strong>Engineering well means building structures that respect that, not ones that paper over it.</strong></p>
+          </div>
+          <div class="unify-callout">
+            <span>The action shape, across all ten ideas</span>
+            Invest in the things words can't carry: <em>external grounding, public criteria, paradigm cases, named acts of speech, multi-turn correction, cultivated judgment, rotated evals.</em>
+            <br><br>
+            Stop trying to make words do work that words structurally cannot do.
+          </div>
+        </div>
+      </div>
+      <div class="runner runner--bottom">
+        <span>The Pattern</span>
+        <span>One mistake &middot; one fix</span>
+      </div>
+    </div>
+    <div data-notes>
+      The through-line lands here. The audience should feel the slides snap into a single shape. The take-home is that all ten ideas manifest the same one mistake, and the same one fix.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       § XIX  ·  MONDAY MORNING &amp; CLOSE
+  ========================================================= -->
+  <section class="leaf t-settle" data-leaf="19">
+    <div class="page">
+      <div class="runner runner--top">
+        <span><span class="roman">§ XIX</span><span class="dot">·</span>Monday morning &middot; the corollary</span>
+        <span>19 / 19</span>
+      </div>
+      <div class="close-grid">
+        <div class="close-head">
+          <h2 class="close-title">Pick one. <em>Do it this week.</em></h2>
+          <p class="close-sub">Each is one philosophical idea, one concrete action, one Monday morning.</p>
+        </div>
+
+        <div class="corollary">
+          <div class="corollary-row">
+            <div class="corollary-num">i.</div>
+            <div class="corollary-philosopher">Wittgenstein<span>private language</span></div>
+            <div class="corollary-action">Audit your system prompt. Replace one internal-state phrase (<em>"be helpful"</em>) with a publicly checkable behavior.</div>
+          </div>
+          <div class="corollary-row">
+            <div class="corollary-num">ii.</div>
+            <div class="corollary-philosopher">Wittgenstein<span>family resemblance</span></div>
+            <div class="corollary-action">Take one definition in your spec or eval. Replace with three sets: paradigm cases, paradigm non-cases, boundary rulings.</div>
+          </div>
+          <div class="corollary-row">
+            <div class="corollary-num">iii.</div>
+            <div class="corollary-philosopher">Frege<span>sense vs reference</span></div>
+            <div class="corollary-action">For one week, treat every referring expression in LLM output (citation, API, version, fact) as unverified. Track how often verification flips it.</div>
+          </div>
+          <div class="corollary-row">
+            <div class="corollary-num">iv.</div>
+            <div class="corollary-philosopher">Hume<span>is-ought</span></div>
+            <div class="corollary-action">For your next normative question to an LLM, name the value frame in the prompt. Compare with a fresh chat where you don't.</div>
+          </div>
+          <div class="corollary-row">
+            <div class="corollary-num">v.</div>
+            <div class="corollary-philosopher">Aristotle<span>phron&#x113;sis</span></div>
+            <div class="corollary-action">For the next agentic task, sample its decisions. Give feedback as <em>reasons</em>, not corrections. Encode the principle into the next prompt.</div>
+          </div>
+        </div>
+
+        <p class="close-foot">Old books. New leverage. Same pattern, every time.<span class="qed"></span></p>
+      </div>
+      <div class="runner runner--bottom">
+        <span>Q.E.D.</span>
+        <span>End &middot; press 1 to restart</span>
+      </div>
+    </div>
+    <div data-notes>
+      Five rows; suggest <em>one</em>. Match to the audience's pain. Applied teams: family resemblance. Platform teams: phron&#x113;sis. Solo builders: Frege. The closing line is the talk's whole pitch in eight words &mdash; let it land. The black square is the Q.E.D.
+    </div>
+  </section>
+
+</main>
+
+<!-- Speaker notes overlay -->
+<div class="notes" id="notesPanel">
+  <span class="notes-label">&para; Speaker</span>
+  <div id="notesBody"></div>
+</div>
+
+<!-- HUD -->
+<div class="hud">
+  <span class="roman-now" id="hudRoman">I</span>
+  <span class="hud-num"><strong id="hudNum">01</strong> &middot; 19</span>
+  <span class="hud-keys">&larr; &rarr; &middot; <span style="font-family: var(--mono); font-weight: 700;">N</span> notes &middot; <span style="font-family: var(--mono); font-weight: 700;">F</span> full</span>
+</div>
+
+<script>
+  (function () {
+    const leaves = Array.from(document.querySelectorAll('.leaf'));
+    const pages = Array.from(document.querySelectorAll('.page'));
+    const total = leaves.length;
+    const hudNum = document.getElementById('hudNum');
+    const hudRoman = document.getElementById('hudRoman');
+    const notesBody = document.getElementById('notesBody');
+    let current = 0;
+
+    const ROMANS = [
+      'I','II','III','IV','V','VI','VII','VIII','IX','X',
+      'XI','XII','XIII','XIV','XV','XVI','XVII','XVIII','XIX'
+    ];
+
+    const PAGE_W = 1600, PAGE_H = 900;
+    function fit() {
+      const ww = window.innerWidth;
+      const wh = window.innerHeight;
+      const margin = 0.92;
+      const scale = Math.min(ww / PAGE_W, wh / PAGE_H) * margin;
+      pages.forEach(p => { p.style.transform = `scale(${scale})`; });
+    }
+    fit();
+    window.addEventListener('resize', fit);
+
+    function activate(target) {
+      target = Math.max(0, Math.min(total - 1, target));
+      if (target === current) return;
+      leaves[current].classList.remove('is-active');
+      leaves[target].classList.add('is-active');
+      current = target;
+      hudNum.textContent = String(target + 1).padStart(2, '0');
+      hudRoman.textContent = ROMANS[target];
+      const el = leaves[target].querySelector('[data-notes]');
+      notesBody.innerHTML = el ? el.innerHTML : '';
+    }
+
+    (function initNotes() {
+      const el = leaves[0].querySelector('[data-notes]');
+      notesBody.innerHTML = el ? el.innerHTML : '';
+    })();
+
+    document.addEventListener('keydown', (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const k = e.key.toLowerCase();
+      if (k === 'arrowright' || k === 'arrowdown' || k === ' ' || k === 'j' || k === 'pagedown') {
+        e.preventDefault(); activate(current + 1);
+      } else if (k === 'arrowleft' || k === 'arrowup' || k === 'k' || k === 'pageup') {
+        e.preventDefault(); activate(current - 1);
+      } else if (k === 'home') { e.preventDefault(); activate(0); }
+      else if (k === 'end')   { e.preventDefault(); activate(total - 1); }
+      else if (k === 'n' || k === 's') {
+        e.preventDefault(); document.body.classList.toggle('notes-on');
+      } else if (k === 'f') {
+        e.preventDefault();
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      } else if (/^[1-9]$/.test(k)) {
+        e.preventDefault(); activate(parseInt(k, 10) - 1);
+      } else if (k === '0') { e.preventDefault(); activate(9); }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.notes, .hud, a, button, input, kbd')) return;
+      if (window.getSelection && window.getSelection().toString()) return;
+      if (e.clientX < window.innerWidth * 0.3) activate(current - 1);
+      else activate(current + 1);
+    });
+  })();
+</script>
+
+</body>
+</html>
