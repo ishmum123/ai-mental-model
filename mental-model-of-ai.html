@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>A Mental Model for AI</title>
+</head>
+<body style="font-family: Helvetica, Arial, sans-serif; background: #eeeeee; margin: 0; padding: 24px; color: #222;">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1 — Title                                                -->
+<!-- ============================================================ -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 1 — TITLE</p>
+  <h1 style="font-size: 56px; font-weight: bold; margin: 80px 0 24px 0; color: #111111; line-height: 1.1;">A Mental Model for AI</h1>
+  <p style="font-size: 24px; color: #555555; margin: 0; font-style: italic; line-height: 1.4;">For software engineers who already use it but haven't examined how.</p>
+
+  <div style="margin-top: 60px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Don't preamble. Skip "what is AI." This audience uses it daily; you're here to make their implicit model visible.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 1                                                         -->
+<!-- ============================================================ -->
+
+<!-- SLIDE 2 — The hook -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 2 — PART 1 · THE HOOK</p>
+  <h1 style="font-size: 48px; font-weight: bold; margin: 60px 0 24px 0; color: #111111; line-height: 1.2;">You already have a mental model of AI.</h1>
+  <p style="font-size: 28px; color: #555555; margin: 0; font-style: italic;">You just haven't examined it.</p>
+
+  <div style="margin-top: 60px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Most engineers absorbed a model from Twitter, podcasts, vendor pitches. That implicit model is steering every prompt and every prompt outcome. The talk is about making it conscious — not adopting one from scratch.
+  </div>
+</div>
+
+<!-- SLIDE 3 — The mechanism -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 3 — PART 1 · THE MECHANISM</p>
+  <h1 style="font-size: 40px; font-weight: bold; margin: 0 0 32px 0; color: #111111; line-height: 1.2;">Mental models are compressed representations.</h1>
+  <p style="font-size: 22px; color: #333333; line-height: 1.5; margin: 0 0 20px 0; font-style: italic;">They let you run cheap simulations of "what if I did X?" without doing X.</p>
+  <p style="font-size: 22px; color: #333333; line-height: 1.5; margin: 0;">Working memory is bounded. Compact models leave room for more options — which is where novel ideas come from.</p>
+
+  <div style="margin-top: 60px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> This is why intuition works. Experts see patterns novices don't because their compression is denser. The point isn't a complete model — it's a compact, mostly-correct one that frees cognitive room.
+  </div>
+</div>
+
+<!-- SLIDE 4 — The risk -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 4 — PART 1 · THE RISK</p>
+  <h1 style="font-size: 36px; font-weight: bold; margin: 0 0 36px 0; color: #111111; line-height: 1.3;">Unconscious models for things you interact with daily are the highest-risk category.</h1>
+  <p style="font-size: 26px; color: #444444; margin: 32px 0; text-align: center; font-weight: bold;">Confidently-wrong &nbsp;&gt;&nbsp; no model &nbsp;&gt;&nbsp; examined-and-imperfect</p>
+
+  <div style="margin-top: 40px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Bad models compound silently — every interaction reinforces them. AI and your IDE are in this category. Engineers who modeled <code>async</code> as parallelism shipped buggy code for years. The fix isn't getting the model perfectly right; it's keeping it conscious and refinable.
+  </div>
+</div>
+
+<!-- SLIDE 5 — Historical shifts -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 5 — PART 1 · MODELS THAT WORKED BECAUSE THEY WERE SIMPLE</p>
+  <h1 style="font-size: 32px; font-weight: bold; margin: 0 0 24px 0; color: #111111; line-height: 1.2;">Three shifts. None complete. All transformative.</h1>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+    <thead>
+      <tr style="background: #f0f0f0;">
+        <th style="border: 1px solid #cccccc; padding: 14px; text-align: left; font-size: 16px; color: #333333; width: 60%;">The shift</th>
+        <th style="border: 1px solid #cccccc; padding: 14px; text-align: left; font-size: 16px; color: #333333;">What it unlocked</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #cccccc; padding: 14px; font-size: 15px; vertical-align: top; line-height: 1.5;"><em>"The universe is mysterious and unpredictable"</em> &nbsp;→&nbsp; <em>"The universe follows mathematical patterns"</em></td>
+        <td style="border: 1px solid #cccccc; padding: 14px; font-size: 15px; vertical-align: top; line-height: 1.5;">The entire scientific revolution</td>
+      </tr>
+      <tr style="background: #fafafa;">
+        <td style="border: 1px solid #cccccc; padding: 14px; font-size: 15px; vertical-align: top; line-height: 1.5;"><em>"Diseases come from bad air or imbalance"</em> &nbsp;→&nbsp; <em>"Diseases are caused by invisible organisms"</em></td>
+        <td style="border: 1px solid #cccccc; padding: 14px; font-size: 15px; vertical-align: top; line-height: 1.5;">Modern medicine, sterile surgery, public sanitation</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #cccccc; padding: 14px; font-size: 15px; vertical-align: top; line-height: 1.5;"><em>"A program is what the computer runs"</em> &nbsp;→&nbsp; <em>"A program can read a text file and treat that as code"</em></td>
+        <td style="border: 1px solid #cccccc; padding: 14px; font-size: 15px; vertical-align: top; line-height: 1.5;">Compilers, interpreters, linters, formatters, IDEs, <code>eval</code>, JIT, code generators, AI code completion</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 24px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> The same noun — <em>a program</em> — shifts roles between left and right of the third row. Before: a program is the thing being run. After: a program is the thing doing the reading. That subject-flip is where every tool on your machine comes from. Linters, compilers, code formatters, your AI autocomplete — all of them are programs reading text and treating it as code. We're going to do the same exercise for AI: take the simple, mostly-correct version that unlocks the most useful behavior.
+  </div>
+</div>
+
+<!-- SLIDE 6 — Pushback pause #1 -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #fffaf0; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 6 — PUSHBACK PAUSE #1 · ~2 MIN</p>
+  <h1 style="font-size: 64px; font-weight: bold; margin: 120px 0 0 0; color: #111111; text-align: center;">Pushback?</h1>
+
+  <div style="margin-top: 80px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> ~2 min. Common objections to surface if not raised: "isn't this obvious?" (no — most haven't named theirs); "but my implicit model works fine" (does it? predict where it'll fail).
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 2                                                         -->
+<!-- ============================================================ -->
+
+<!-- SLIDE 7 — Models you might already be using -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 7 — PART 2 · WHAT MODEL ARE YOU ALREADY USING?</p>
+  <h1 style="font-size: 32px; font-weight: bold; margin: 0 0 24px 0; color: #111111; line-height: 1.2;">Models you might already be using</h1>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 16px 0;">
+    <thead>
+      <tr style="background: #f0f0f0;">
+        <th style="border: 1px solid #cccccc; padding: 12px; text-align: left; font-size: 15px; color: #333333; width: 25%;">Model</th>
+        <th style="border: 1px solid #cccccc; padding: 12px; text-align: left; font-size: 15px; color: #333333; width: 35%;">Predicts well</th>
+        <th style="border: 1px solid #cccccc; padding: 12px; text-align: left; font-size: 15px; color: #333333;">Misses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; font-weight: bold; line-height: 1.4;">Autocomplete on steroids</td>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; line-height: 1.4;">Text completion, simple code suggestions</td>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; line-height: 1.4;">Agency, tool use, multi-step reasoning</td>
+      </tr>
+      <tr style="background: #fafafa;">
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; font-weight: bold; line-height: 1.4;">Junior intern</td>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; line-height: 1.4;">Mistakes, needs supervision, benefits from feedback</td>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; line-height: 1.4;">Vast knowledge breadth; isn't a brainstorming partner by default; supplying the <em>what + why</em> improves AI's output, while a junior might be overwhelmed by it</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; font-weight: bold; line-height: 1.4;">Stochastic parrot</td>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; line-height: 1.4;">Hallucination, surface mimicry, no understanding</td>
+        <td style="border: 1px solid #cccccc; padding: 12px; font-size: 14px; vertical-align: top; line-height: 1.4;">Actual usefulness in real workflows</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size: 18px; color: #444444; margin: 16px 0 0 0; font-style: italic;">Each captures a fragment. None alone is enough.</p>
+
+  <div style="margin-top: 24px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> "Show of hands — which one are you carrying?" Walk through each. Don't dunk on them — each captures a real fragment. Autocomplete predicts continuation. Intern predicts the supervision burden. Parrot predicts hallucinations. Each is partial. The intern lens hurts the most for senior engineers — you brainstorm with peers, you give tasks to interns; treating AI as an intern caps you at small delegations. Counterintuitive: the <em>what + why</em> discipline that helps AI is the opposite of how you'd onboard a junior. Managers good at gradual context-building for humans will be worse at directing AI.
+  </div>
+</div>
+
+<!-- SLIDE 8 — Where this lands -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 8 — PART 2 · WHERE THIS LANDS</p>
+  <h1 style="font-size: 44px; font-weight: bold; margin: 40px 0 32px 0; color: #111111; line-height: 1.2; text-align: center;">One artifact. Two bounds.<br>You live in between.</h1>
+
+  <ul style="font-size: 19px; color: #333333; line-height: 1.6; margin: 32px 0 24px 0; padding-left: 24px;">
+    <li style="margin-bottom: 14px;"><strong>Upper bound</strong> — a smart, knowledgeable human who doesn't know what you want or why, and has no body. <em>Where the field is heading.</em></li>
+    <li style="margin-bottom: 14px;"><strong>Lower bound</strong> — a text-to-text parser with tool calls. <em>What you must assume when reliability matters and you're out of the loop.</em></li>
+  </ul>
+
+  <p style="font-size: 20px; color: #444444; margin: 0; font-style: italic; text-align: center;">The skill is calibration — based on how tight your verification loop is.</p>
+
+  <div style="margin-top: 32px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> The candidates on the previous slide were partial views — autocomplete is a primitive lower bound, intern is a primitive upper bound, parrot is the pessimistic floor-only view. These two bounds subsume what's right in each and discard what's wrong. You don't pick one; you operate in between, calibrating by how tight your verification loop is. Tight loop (you check each output) → operate near the upper bound. No loop (autonomous in production) → operate near the lower bound.
+  </div>
+</div>
+
+<!-- SLIDE 9 — Upper bound: Smart human -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 9 — PART 2 · UPPER BOUND</p>
+  <h1 style="font-size: 28px; font-weight: bold; margin: 0 0 16px 0; color: #111111; line-height: 1.3;">Upper bound — a smart, knowledgeable human who doesn't know what you want or why, and has no body.</h1>
+
+  <p style="font-size: 17px; color: #333333; line-height: 1.6; margin: 12px 0;"><em>What the field is building toward. What AI approaches under tight verification loops.</em></p>
+  <p style="font-size: 17px; color: #333333; line-height: 1.6; margin: 12px 0;"><strong>Operate near this bound when</strong> you can verify each output before acting on it: brainstorming, debugging interactively, drafting RFCs.</p>
+  <p style="font-size: 17px; color: #333333; line-height: 1.6; margin: 12px 0;">Give it <strong><em>what + why</em></strong>. Hand it tools (search, code execution) when accuracy matters.</p>
+
+  <p style="font-size: 17px; color: #1a6b2d; margin: 20px 0 8px 0; font-weight: bold;">Permanent property — even at the upper bound:</p>
+  <p style="font-size: 16px; color: #333333; line-height: 1.6; margin: 0 0 16px 0; padding-left: 16px; border-left: 3px solid #1a6b2d;">It cannot know your exact <em>what</em> and <em>why</em>. Articulating intent is a forever-skill — it doesn't shrink with model capability.</p>
+
+  <p style="font-size: 16px; color: #b32d2d; margin: 12px 0 6px 0; font-weight: bold;">Caveats — how the current upper bound falls short:</p>
+  <ul style="font-size: 15px; color: #333333; line-height: 1.5; margin: 0; padding-left: 24px;">
+    <li><strong>Demand pushback.</strong> Sycophancy is the default.</li>
+    <li><strong>Verify facts.</strong> It confidently invents.</li>
+    <li><strong>Force clarifying questions.</strong> It plows ahead silently.</li>
+  </ul>
+
+  <div style="margin-top: 20px; padding: 14px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 13px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Two layers. (1) The caveats aren't permanent — they're how the <em>current</em> approximation falls short of the upper-bound ideal. As models improve, these caveats shrink. (2) The <em>what + why</em> property is structural — it doesn't shrink with model capability. No matter how smart AI gets, you carry the intent. That's why intent articulation is a forever-skill, not a transitional one.
+  </div>
+</div>
+
+<!-- SLIDE 10 — Lower bound: Parser -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 10 — PART 2 · LOWER BOUND</p>
+  <h1 style="font-size: 28px; font-weight: bold; margin: 0 0 16px 0; color: #111111; line-height: 1.3;">Lower bound — a text-to-text parser with tool calls (tool calls are also text).</h1>
+
+  <p style="font-size: 17px; color: #333333; line-height: 1.6; margin: 12px 0;"><em>What you must assume when reliability matters and you're out of the loop.</em></p>
+  <p style="font-size: 17px; color: #333333; line-height: 1.6; margin: 12px 0;"><strong>Operate near this bound when</strong> you can't verify each output: production systems, autonomous workflows, anything running while you're absent.</p>
+
+  <p style="font-size: 17px; color: #1a6b2d; margin: 20px 0 8px 0; font-weight: bold;">Useful insights — even at the lower bound:</p>
+  <ul style="font-size: 15px; color: #333333; line-height: 1.55; margin: 0 0 16px 0; padding: 0 0 0 32px; list-style-type: disc; border-left: 3px solid #1a6b2d;">
+    <li style="margin-bottom: 8px; padding-left: 4px;">You can give it tools to make non-deterministic, abstract decisions while you're absent. The floor is already useful — you don't need AGI to ship something autonomous.</li>
+    <li style="padding-left: 4px;">You don't need the biggest, best, or most expensive model. A small, cheap, even local model that understands your use case and tools (e.g., parsing <code>grep</code> output to act as an intelligent file searcher) is enough to ship and stay afloat for a while.</li>
+  </ul>
+
+  <p style="font-size: 16px; color: #b32d2d; margin: 12px 0 6px 0; font-weight: bold;">Caveat — three dials:</p>
+  <ul style="font-size: 15px; color: #333333; line-height: 1.5; margin: 0; padding-left: 24px;">
+    <li>Narrower <strong>input</strong> (less ambiguity, fewer ways to misinterpret)</li>
+    <li>Narrower <strong>output space</strong> (schemas, formats, fixed options)</li>
+    <li>Shorter <strong>output</strong> (less room to drift)</li>
+  </ul>
+  <p style="font-size: 15px; color: #444444; margin: 8px 0 0 0; font-style: italic;">All three compound.</p>
+
+  <div style="margin-top: 20px; padding: 14px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 13px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Two implications of treating it as just a parser. (1) Agentic: floor-level AI plus tools plus constraints runs abstract decisions in production while you're absent — don't wait for the upper bound. (2) Cost: you stop chasing frontier models. A small/cheap/local model that understands your tools (e.g., one that runs <code>grep</code> and parses output) is often enough. The race for biggest model is a smart-human-mode habit; parser mode rewards "smallest model that gets the job done." Both ends of the parser matter — vague input + tight schema still produces confident-but-wrong answers; precise input + open essay format drifts.
+  </div>
+</div>
+
+<!-- SLIDE 11 — Calibrate, then recalibrate -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 11 — PART 2 · CALIBRATE, THEN RECALIBRATE</p>
+  <h1 style="font-size: 30px; font-weight: bold; margin: 0 0 16px 0; color: #111111; line-height: 1.3;">Calibrate by how tight your verification loop is.</h1>
+  <p style="font-size: 18px; color: #444444; margin: 0 0 16px 0; line-height: 1.6;">Tight loop (you check each output) → operate near the upper bound.<br>No loop (autonomous in production) → operate near the lower bound.</p>
+  <p style="font-size: 19px; color: #b32d2d; margin: 16px 0 16px 0; font-weight: bold;">When something surprises you, you've miscalibrated. Recalibrate.</p>
+
+  <table style="width: 100%; border-collapse: collapse; margin: 12px 0;">
+    <thead>
+      <tr style="background: #f0f0f0;">
+        <th style="border: 1px solid #cccccc; padding: 10px; text-align: left; font-size: 14px; color: #333333; width: 22%;">You assumed…</th>
+        <th style="border: 1px solid #cccccc; padding: 10px; text-align: left; font-size: 14px; color: #333333; width: 38%;">…and surprised that</th>
+        <th style="border: 1px solid #cccccc; padding: 10px; text-align: left; font-size: 14px; color: #333333;">Recalibrate toward</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="border: 1px solid #cccccc; padding: 10px; font-size: 14px; vertical-align: top; font-weight: bold; line-height: 1.5;">Upper bound</td>
+        <td style="border: 1px solid #cccccc; padding: 10px; font-size: 14px; vertical-align: top; line-height: 1.5;">AI forgot last week's chat</td>
+        <td style="border: 1px solid #cccccc; padding: 10px; font-size: 14px; vertical-align: top; line-height: 1.5;">Lower bound — pipe memory in explicitly</td>
+      </tr>
+      <tr style="background: #fafafa;">
+        <td style="border: 1px solid #cccccc; padding: 10px; font-size: 14px; vertical-align: top; font-weight: bold; line-height: 1.5;">Lower bound</td>
+        <td style="border: 1px solid #cccccc; padding: 10px; font-size: 14px; vertical-align: top; line-height: 1.5;">20 schema rules made output <em>worse</em></td>
+        <td style="border: 1px solid #cccccc; padding: 10px; font-size: 14px; vertical-align: top; line-height: 1.5;">Upper bound — explain the <em>why</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 16px; padding: 14px; background: #eef5ee; border-left: 4px solid #1a6b2d; font-size: 14px; color: #2a4a2a;">
+    <strong>Two action insights to carry alongside:</strong>
+    <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.5;">
+      <li>Even at the upper bound, AI can't know your exact <em>what + why</em> — articulate intent, always.</li>
+      <li>Even at the lower bound, tools + constraints make AI autonomously useful — build agentic systems now, don't wait.</li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 16px; padding: 14px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 13px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Notice the surprise, name which bound you were assuming, slide toward the other. The two action insights below the table are the takeaways the audience should leave with — they hold whether the upper bound is fully achieved or not, and they hold whether the lower bound is the floor or rising.
+  </div>
+</div>
+
+<!-- SLIDE 12 — Context = what + why -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 12 — PART 2 · WHAT "CONTEXT" ACTUALLY MEANS</p>
+  <h1 style="font-size: 52px; font-weight: bold; margin: 60px 0 24px 0; color: #111111; line-height: 1.2; text-align: center;">Context = what you want + why you want it.</h1>
+  <p style="font-size: 20px; color: #555555; margin: 0 0 16px 0; font-style: italic; text-align: center; line-height: 1.5;">Everything else (state, constraints, conventions, taste, examples) is a sub-question of one of those two.</p>
+  <p style="font-size: 18px; color: #1a6b2d; margin: 32px 0 0 0; text-align: center; font-weight: bold;">Even at the upper bound, AI cannot know these. You carry the intent — forever.</p>
+
+  <div style="margin-top: 40px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> This is the operative definition. When anyone says "give it more context" — <em>what + why</em> is what they mean. The connection back to the upper-bound permanence: whatever AI becomes, the <em>what + why</em> gap stays. Intent articulation is the permanent skill — Part 3 will treat it as the core engineering hire-for skill.
+  </div>
+</div>
+
+<!-- SLIDE 13 — Pushback pause #2 -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #fffaf0; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 13 — PUSHBACK PAUSE #2 · ~3 MIN</p>
+  <h1 style="font-size: 64px; font-weight: bold; margin: 120px 0 0 0; color: #111111; text-align: center;">Pushback?</h1>
+
+  <div style="margin-top: 80px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> ~3 min. Most-likely pushback: "but X failure mode breaks your model." Steelman it, name which lens it lives under, refine in real time. This is the comparative-framing payoff.
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PART 3                                                         -->
+<!-- ============================================================ -->
+
+<!-- SLIDE 14 — Work -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 14 — PART 3 · WORK</p>
+  <h1 style="font-size: 36px; font-weight: bold; margin: 0 0 32px 0; color: #111111; line-height: 1.2;">What changes about your work.</h1>
+
+  <ul style="font-size: 19px; color: #333333; line-height: 1.7; margin: 0; padding-left: 24px;">
+    <li style="margin-bottom: 18px;"><strong>Intent articulation becomes a core engineering skill.</strong> The <em>what + why</em> is the work; coding speed matters less.</li>
+    <li style="margin-bottom: 18px;"><strong>Pushback discipline becomes hygiene.</strong> Sycophancy is the default failure mode; you must demand challenge.</li>
+    <li style="margin-bottom: 18px;"><strong>Use cases expand beyond coding.</strong> Architecture, RFC review, postmortems, comms drafts, code review, career thinking, strategy — anywhere a smart-human collaborator would help.</li>
+  </ul>
+
+  <div style="margin-top: 24px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> The "more use cases" expansion is the practical lift. Most senior engineers cap AI at coding; the smart-human lens predicts it's useful anywhere brainstorming is. The bottleneck has moved — writing speed of code matters less; specifying intent clearly matters more.
+  </div>
+</div>
+
+<!-- SLIDE 15 — Field -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 15 — PART 3 · FIELD</p>
+  <h1 style="font-size: 36px; font-weight: bold; margin: 0 0 32px 0; color: #111111; line-height: 1.2;">What changes about the field.</h1>
+
+  <ul style="font-size: 19px; color: #333333; line-height: 1.7; margin: 0; padding-left: 24px;">
+    <li style="margin-bottom: 18px;">Hiring profile shifts toward <strong>specification + verification</strong>.</li>
+    <li style="margin-bottom: 18px;">Frameworks go <strong>schema-first, verification-first</strong>.</li>
+    <li style="margin-bottom: 18px;">Comp curves bend for engineers who can <strong>drive AI well</strong>.</li>
+  </ul>
+
+  <div style="margin-top: 24px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Brief slide. These are second-order consequences for the audience to chew on, not predictions to defend in detail.
+  </div>
+</div>
+
+<!-- SLIDE 16 — Model-breakage / gap closing -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 16 — PART 3 · THE GAP CLOSING</p>
+  <h1 style="font-size: 34px; font-weight: bold; margin: 0 0 16px 0; color: #111111; line-height: 1.2;">The maintenance schedule — what to watch for.</h1>
+  <p style="font-size: 18px; color: #555555; margin: 0 0 20px 0; font-style: italic;">Signals that the upper bound's caveats are dissolving — i.e. the gap between bounds is closing.</p>
+
+  <ul style="font-size: 17px; color: #333333; line-height: 1.6; margin: 0; padding-left: 24px;">
+    <li style="margin-bottom: 14px;">If AI starts asking good clarifying questions by default → upper bound's first caveat dissolves.</li>
+    <li style="margin-bottom: 14px;">If persistent memory across sessions becomes default → upper bound gets closer to literal.</li>
+    <li style="margin-bottom: 14px;">If sycophancy is engineered out → user-side enforcement burden drops dramatically.</li>
+  </ul>
+
+  <p style="font-size: 17px; color: #1a6b2d; margin: 20px 0 0 0; font-weight: bold;">But the structural <em>what + why</em> limit at the upper bound stays. You always carry the intent.</p>
+
+  <div style="margin-top: 16px; padding: 14px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 13px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Most talks skip this slide. Including it is the comparative-framing move — you're not selling a thesis; you're handing them a tool with a service interval. The gap-closing framing also dignifies the audience's skepticism: yes, things will change, here's how to update the model. The permanence of <em>what + why</em> is the durable through-line — it's true today, true at AGI, true after.
+  </div>
+</div>
+
+<!-- SLIDE 17 — Monday morning -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 17 — PART 3 · MONDAY MORNING</p>
+  <h1 style="font-size: 40px; font-weight: bold; margin: 0 0 16px 0; color: #111111; line-height: 1.2;">Pick one. Do it this week.</h1>
+
+  <ul style="font-size: 18px; color: #333333; line-height: 1.6; margin: 24px 0 0 0; padding-left: 24px;">
+    <li style="margin-bottom: 18px;"><strong>Audit your implicit model.</strong> Spend 10 minutes writing what you currently assume about AI before your next prompt.</li>
+    <li style="margin-bottom: 18px;"><strong>Pre-mortem your next session.</strong> Write the <em>what</em>, the <em>why</em>, what you're <em>not</em> giving, and your prediction for the failure mode. Score yourself afterward.</li>
+    <li style="margin-bottom: 18px;"><strong>Track sycophancy for one week.</strong> Every time AI agrees with you, ask "would a competent skeptic have agreed?" Count the gap.</li>
+  </ul>
+
+  <div style="margin-top: 20px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> Pre-mortem is the strongest — smallest action that exercises the whole model in one session. Three is the cap; don't read all six options from your private list.
+  </div>
+</div>
+
+<!-- SLIDE 18 — Close -->
+<div style="width: 900px; min-height: 480px; margin: 0 auto 32px auto; padding: 60px; background: #ffffff; border: 1px solid #cccccc; page-break-after: always;">
+  <p style="font-size: 14px; color: #888888; margin: 0 0 24px 0; letter-spacing: 2px;">SLIDE 18 — CLOSE</p>
+  <h1 style="font-size: 52px; font-weight: bold; margin: 100px 0 24px 0; color: #111111; line-height: 1.2; text-align: center;">The best working model I've found so far.</h1>
+  <p style="font-size: 24px; color: #555555; margin: 0; font-style: italic; text-align: center;">Push back. Refine. Replace it when it breaks.</p>
+
+  <div style="margin-top: 80px; padding: 16px; background: #f5f5f5; border-left: 4px solid #888888; font-size: 14px; font-style: italic; color: #555555;">
+    <strong style="color: #333333;">Speaker notes:</strong> End on the comparative frame. The model isn't the point; keeping a conscious model is the point. Invite refinement explicitly — these are curious seniors, they'll take you up on it.
+  </div>
+</div>
+
+</body>
+</html>
