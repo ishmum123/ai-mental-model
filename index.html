@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Mental Model for AI</title>
+<title>A Mental Model for AI — Talk</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,200..700;1,6..72,200..700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -748,8 +748,8 @@
   }
   .s7__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 56px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 56px;
     margin-top: 32px;
   }
   .s7__card { position: relative; }
@@ -1297,110 +1297,85 @@
       </div>
 
       <div class="s1__main">
-        <p class="s1__kicker">An essay in eighteen frames</p>
+        <p class="s1__kicker">An essay in twelve frames</p>
         <h1 class="s1__title">A Mental<br>Model for <em>AI</em>.</h1>
-        <p class="s1__byline">For software engineers who already use it &mdash; but haven't examined how.</p>
+        <p class="s1__byline">For engineers and team leads who already build with it &mdash; but haven't examined how.</p>
       </div>
 
-      <div class="s1__meta">Lecture <span>&middot;</span> 30 min <span>&middot;</span> two pushback pauses</div>
+      <div class="s1__meta">Lecture <span>&middot;</span> 15&ndash;20 min <span>&middot;</span> two clarification pauses</div>
 
-      <span class="stage__num"><strong>01</strong> &middot; 18</span>
+      <span class="stage__num"><strong>01</strong> &middot; 13</span>
     </div>
     <div class="speaker-notes-content" data-notes>
-      Don't preamble. Skip "what is AI." This audience uses it daily; you're here to make their implicit model visible.
+      Don't preamble. Skip "what is AI." This audience uses it daily and builds with it; you're here to make their implicit model visible. Caveat the room: your lens is senior-coder; technical PMs will need a step of mental translation on examples.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 2 · THE HOOK
+       SLIDE 2 · YOU HAVE ONE — UNCONSCIOUS IS DANGEROUS (DARK)
   ========================================================= -->
-  <section class="slide off-fly-right" data-slide="2">
+  <section class="slide slide--ink off-corner-tl" data-slide="2">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 720px; top: -100px; right: -40px;">02</span>
-      <div class="vert-mark">Part I &middot; The Hook</div>
-
-      <div class="stage__bounds" style="display: flex; align-items: center;">
-        <div class="s2__poster">
-          <h2 class="s2__title">You already have a mental model of <em style="font-style: italic; color: var(--accent);">AI</em>.</h2>
-          <p class="s2__sub">You just haven't <span style="color: var(--ink); font-style: normal; text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 8px;">examined</span> it.</p>
-        </div>
-      </div>
-
-      <div class="stage__footer">02 &middot; The Hook</div>
-      <span class="stage__num"><strong>02</strong> &middot; 18</span>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      Most engineers absorbed a model from Twitter, podcasts, vendor pitches. That implicit model is steering every prompt and every prompt outcome. The talk is about making it conscious — not adopting one from scratch.
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 3 · THE MECHANISM
-  ========================================================= -->
-  <section class="slide slide--paper off-fly-down" data-slide="3">
-    <div class="stage">
-      <span class="s3__quote">&ldquo;</span>
-      <div class="vert-mark">Part I &middot; The Mechanism</div>
-      <span class="ghost-num" style="font-size: 480px; bottom: -80px; left: 80px; opacity: 0.04;">03</span>
-
-      <div class="s3__main">
-        <h2 class="s3__title">Mental models are <em>compressed representations</em>.</h2>
-        <div class="s3__body">
-          <p>They let you run cheap simulations of "what if I did X?" without doing X.</p>
-          <p style="font-style: italic; color: var(--ink-soft); border-left: 1px solid var(--accent); padding-left: 22px; margin-top: 28px;">Working memory is bounded. Compact models leave room for more options &mdash; which is where novel ideas come from.</p>
-        </div>
-      </div>
-
-      <span class="stage__num"><strong>03</strong> &middot; 18</span>
-      <div class="stage__footer">03 &middot; The Mechanism</div>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      This is why intuition works. Experts see patterns novices don't because their compression is denser. The point isn't a complete model — it's a compact, mostly-correct one that frees cognitive room.
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 4 · THE RISK (DARK)
-  ========================================================= -->
-  <section class="slide slide--ink off-corner-tl" data-slide="4">
-    <div class="stage">
-      <span class="ghost-num" style="font-size: 760px; top: -120px; right: -60px; color: var(--accent); opacity: 0.18;">04</span>
-      <div class="vert-mark" style="color: rgba(242, 235, 218, 0.4);">Part I &middot; The Risk</div>
+      <div class="vert-mark" style="color: rgba(242, 235, 218, 0.4);">Part I &middot; The Premise</div>
 
       <div class="stage__bounds" style="display: flex; flex-direction: column; justify-content: center;">
         <h2 class="s4__title">
-          Unconscious models for things you interact with <em>daily</em> are the highest-risk category.
+          You already have a mental model of <em>AI</em>.
         </h2>
 
         <div>
           <div class="s4__caption">&mdash; Hierarchy of harm &mdash;</div>
           <div class="s4__hierarchy">
-            <span class="bad">Confidently-wrong</span><span class="gt">&gt;</span>no model<span class="gt">&gt;</span><span class="ok">examined-and-imperfect</span>
+            <span class="bad">Unconscious and wrong</span><span class="gt">&gt;</span>no model<span class="gt">&gt;</span><span class="ok">examined-and-imperfect</span>
           </div>
         </div>
       </div>
 
-      <span class="stage__num" style="color: rgba(242, 235, 218, 0.5);"><strong style="color: #E8B5A8;">04</strong> &middot; 18</span>
-      <div class="stage__footer" style="color: rgba(242, 235, 218, 0.4);">04 &middot; The Risk</div>
+      <span class="stage__num" style="color: rgba(242, 235, 218, 0.5);"><strong style="color: #E8B5A8;">02</strong> &middot; 13</span>
+      <div class="stage__footer" style="color: rgba(242, 235, 218, 0.4);">02 &middot; The Premise</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      Bad models compound silently — every interaction reinforces them. AI and your IDE are in this category. Engineers who modeled <code>async</code> as parallelism shipped buggy code for years. The fix isn't getting the model perfectly right; it's keeping it conscious and refinable.
+      Every prompt is steered by an implicit model absorbed from Twitter, vendors, podcasts. The category that compounds silently is the one you use daily &mdash; AI lives in that category. Bad models reinforce themselves every interaction because the predictions are never checked. The fix isn't getting the model perfectly right; it's keeping it conscious and refinable.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 5 · HISTORICAL SHIFTS
+       SLIDE 3 · MENTAL MODELS = SIMULATION DEVICES
   ========================================================= -->
-  <section class="slide off-fly-right" data-slide="5">
+  <section class="slide slide--paper off-fly-down" data-slide="3">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 600px; top: -90px; right: 60px;">05</span>
+      <span class="s3__quote">&ldquo;</span>
+      <div class="vert-mark">Part I &middot; The Mechanism</div>
+
+      <div class="s3__main">
+        <h2 class="s3__title">Mental models are <em>simulation devices</em>.</h2>
+        <div class="s3__body">
+          <p>They let you ask "what if I did X?" <em>without doing X</em>.</p>
+          <p style="font-style: italic; color: var(--ink-soft); border-left: 1px solid var(--accent); padding-left: 22px; margin-top: 28px;">Compact-and-mostly-right beats complete-and-overwhelming.</p>
+          <p style="margin-top: 24px; font-size: 19px;">A chess master reconstructs a mid-game board at a glance; a novice stares piece-by-piece. Same eyes, different compression.</p>
+        </div>
+      </div>
+
+      <span class="stage__num"><strong>03</strong> &middot; 13</span>
+      <div class="stage__footer">03 &middot; The Mechanism</div>
+    </div>
+    <div class="speaker-notes-content" data-notes>
+      This is why intuition works. Experts see patterns novices don't because their compression is denser. The point isn't a complete model &mdash; it's a compact, mostly-correct one that frees cognitive room. Chase &amp; Simon 1973 is the citation; show random-board condition to make the point that compression is domain-specific, not raw memory.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 4 · THREE HISTORICAL SHIFTS
+  ========================================================= -->
+  <section class="slide off-fly-right" data-slide="4">
+    <div class="stage">
       <div class="vert-mark">Part I &middot; Three Shifts</div>
 
       <div class="stage__bounds">
         <div class="s5__head">
           <p class="caption" style="margin-bottom: 12px;">&mdash; A precedent &mdash;</p>
           <h2 class="s5__title">Models that worked because they were <em>simple</em>.</h2>
-          <p class="s5__sub">None complete. All transformative.</p>
+          <p class="s5__sub">None complete. All transformative. You're allowed to use a simple one.</p>
         </div>
 
         <div class="s5__shifts">
@@ -1417,56 +1392,53 @@
             <div class="s5__outcome">Modern medicine, sterile surgery, public sanitation.</div>
           </div>
           <div class="s5__shift">
-            <div class="s5__before">"A program is what the computer runs"</div>
+            <div class="s5__before">"Computers can only run instruction numbers"</div>
             <div class="s5__arrow">&rarr;</div>
-            <div class="s5__after">"A program can read a text file and treat that as code."</div>
+            <div class="s5__after">"Computers can read text and convert it into instruction numbers."</div>
             <div class="s5__outcome">Compilers, linters, IDEs, <code>eval</code>, JIT, code generators, AI completion.</div>
           </div>
         </div>
       </div>
 
-      <span class="stage__num"><strong>05</strong> &middot; 18</span>
-      <div class="stage__footer">05 &middot; Three Shifts</div>
+      <span class="stage__num"><strong>04</strong> &middot; 13</span>
+      <div class="stage__footer">04 &middot; Three Shifts</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      The same noun &mdash; <em>a program</em> &mdash; shifts roles between left and right of the third row. Before: a program is the thing being run. After: a program is the thing doing the reading. That subject-flip is where every tool on your machine comes from. We're going to do the same exercise for AI.
+      The same noun &mdash; <em>a program</em> &mdash; flips subject roles between left and right of the third row. Before: a program is the thing being run. After: a program is the thing doing the reading. That subject-flip is where every tool on your machine comes from. We're going to do the same exercise for AI in the second act.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 6 · PUSHBACK PAUSE 1
+       SLIDE 5 · PUSHBACK PAUSE 1
   ========================================================= -->
-  <section class="slide slide--deep off-zoom-back-far" data-slide="6">
+  <section class="slide slide--deep off-zoom-back-far" data-slide="5">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 1100px; top: -180px; left: -160px; opacity: 0.025;">06</span>
-
       <div class="stage__bounds" style="display: flex; align-items: center; justify-content: center;">
         <div class="pause__wrap">
           <div class="pause__ornament">&#8258;</div>
-          <h2 class="pause__word">Pushback?</h2>
+          <h2 class="pause__word">Questions?</h2>
           <p class="pause__sub">Pause &middot; ~ 2 min</p>
         </div>
       </div>
 
-      <span class="stage__num"><strong>06</strong> &middot; 18</span>
-      <div class="stage__footer">06 &middot; Intermission</div>
+      <span class="stage__num"><strong>05</strong> &middot; 13</span>
+      <div class="stage__footer">05 &middot; Intermission</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      ~2 min. Common objections to surface if not raised: "isn't this obvious?" (no — most haven't named theirs); "but my implicit model works fine" (does it? predict where it'll fail).
+      ~2 min. Common objections to surface if not raised: "isn't this obvious?" (no &mdash; most haven't named theirs); "but my implicit model works fine" (does it? predict where it'll fail). This pause closes the preamble before the AI-specific content begins.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 7 · CANDIDATES
+       SLIDE 6 · CANDIDATES (1 of 2)
   ========================================================= -->
-  <section class="slide off-corner-br" data-slide="7">
+  <section class="slide off-corner-br" data-slide="6">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 580px; top: -90px; right: -20px;">07</span>
       <div class="vert-mark">Part II &middot; Candidates</div>
 
       <div class="stage__bounds">
         <div class="s7__head">
-          <p class="caption" style="margin-bottom: 12px;">&mdash; Models you may already use &mdash;</p>
+          <p class="caption" style="margin-bottom: 12px;">&mdash; Models you may already use &middot; 1 of 2 &mdash;</p>
           <h2 class="s7__title">Which one are you <em>carrying</em>?</h2>
           <p class="s7__sub">Each captures a fragment. None alone is enough.</p>
         </div>
@@ -1476,8 +1448,8 @@
             <div class="s7__card-num">i</div>
             <h3 class="s7__card-name">Autocomplete<br>on steroids</h3>
             <div class="s7__row">
-              <div class="s7__row-label">Predicts well</div>
-              <div class="s7__row-text">Text completion, simple code suggestions.</div>
+              <div class="s7__row-label">Predicts</div>
+              <div class="s7__row-text">Text completion, simple suggestions.</div>
             </div>
             <div class="s7__row s7__row--miss">
               <div class="s7__row-label">Misses</div>
@@ -1489,25 +1461,62 @@
             <div class="s7__card-num">ii</div>
             <h3 class="s7__card-name">Junior intern</h3>
             <div class="s7__row">
-              <div class="s7__row-label">Predicts well</div>
-              <div class="s7__row-text">Mistakes, needs supervision, benefits from feedback.</div>
+              <div class="s7__row-label">Predicts</div>
+              <div class="s7__row-text">Needs supervision, learns from feedback.</div>
             </div>
             <div class="s7__row s7__row--miss">
               <div class="s7__row-label">Misses</div>
-              <div class="s7__row-text">Vast knowledge breadth; isn't a brainstorming partner; supplying <em>what + why</em> helps AI but overwhelms a junior.</div>
+              <div class="s7__row-text">Vast breadth; not a peer; caps your ambition.</div>
             </div>
           </article>
+        </div>
+      </div>
 
+      <span class="stage__num"><strong>06</strong> &middot; 13</span>
+      <div class="stage__footer">06 &middot; Candidates</div>
+    </div>
+    <div class="speaker-notes-content" data-notes>
+      "Show of hands &mdash; which one are you carrying?" Walk through both. Autocomplete is the underestimating lens &mdash; treats AI as glorified completion. The intern lens hurts senior engineers most: you brainstorm with peers, give tasks to interns. The <em>what + why</em> discipline that helps AI is the opposite of how you'd onboard a junior.
+    </div>
+  </section>
+
+  <!-- =========================================================
+       SLIDE 7 · CANDIDATES (2 of 2)
+  ========================================================= -->
+  <section class="slide off-corner-tr" data-slide="7">
+    <div class="stage">
+      <div class="vert-mark">Part II &middot; Candidates</div>
+
+      <div class="stage__bounds">
+        <div class="s7__head">
+          <p class="caption" style="margin-bottom: 12px;">&mdash; Models you may already use &middot; 2 of 2 &mdash;</p>
+          <h2 class="s7__title">&hellip;and two <em>more</em>.</h2>
+        </div>
+
+        <div class="s7__grid">
           <article class="s7__card">
             <div class="s7__card-num">iii</div>
             <h3 class="s7__card-name">Stochastic<br>parrot</h3>
             <div class="s7__row">
-              <div class="s7__row-label">Predicts well</div>
-              <div class="s7__row-text">Hallucination, surface mimicry, no understanding.</div>
+              <div class="s7__row-label">Predicts</div>
+              <div class="s7__row-text">Hallucination, surface mimicry.</div>
             </div>
             <div class="s7__row s7__row--miss">
               <div class="s7__row-label">Misses</div>
-              <div class="s7__row-text">Actual usefulness in real workflows.</div>
+              <div class="s7__row-text">Real usefulness in real workflows.</div>
+            </div>
+          </article>
+
+          <article class="s7__card">
+            <div class="s7__card-num">iv</div>
+            <h3 class="s7__card-name">Genie /<br>wish-granter</h3>
+            <div class="s7__row">
+              <div class="s7__row-label">Predicts</div>
+              <div class="s7__row-text">Natural language in; handles ambiguity.</div>
+            </div>
+            <div class="s7__row s7__row--miss">
+              <div class="s7__row-label">Misses</div>
+              <div class="s7__row-text">No predictable limits on what it cannot do.</div>
             </div>
           </article>
         </div>
@@ -1515,20 +1524,19 @@
         <p class="s7__coda">A fragment each. <em>None enough.</em></p>
       </div>
 
-      <span class="stage__num"><strong>07</strong> &middot; 18</span>
+      <span class="stage__num"><strong>07</strong> &middot; 13</span>
       <div class="stage__footer">07 &middot; Candidates</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      "Show of hands — which one are you carrying?" Walk through each. The intern lens hurts senior engineers most: you brainstorm with peers, you give tasks to interns. Counterintuitive: the <em>what + why</em> discipline that helps AI is the opposite of how you'd onboard a junior.
+      On the parrot: the metaphysical claim ("no understanding") doesn't constrain behavioral prediction &mdash; if "it's just patterns" doesn't tell you what AI can and can't do for your task, drop the lens. The genie lens is the most seductive and the most dangerous in production &mdash; it shifts intent-articulation onto the AI, which is the one thing AI structurally can't do for you.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 8 · BOUNDS
+       SLIDE 7 · TWO BOUNDS
   ========================================================= -->
   <section class="slide slide--paper off-side-read" data-slide="8">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 660px; top: -110px; left: -40px;">08</span>
       <div class="vert-mark">Part II &middot; Where This Lands</div>
 
       <div class="stage__bounds">
@@ -1539,7 +1547,7 @@
             <div class="s8__col-tag">Upper bound</div>
             <h3 class="s8__col-title">A smart, knowledgeable <em>human</em>.</h3>
             <p class="s8__col-desc">
-              Doesn't know what you want or why. No body.
+              Doesn't know your intent. Forgets between sessions.
               <strong>Where the field is heading.</strong>
             </p>
           </div>
@@ -1547,139 +1555,43 @@
             <div class="s8__col-tag">Lower bound</div>
             <h3 class="s8__col-title">A text-to-text <em>parser</em>.</h3>
             <p class="s8__col-desc">
-              With tool calls (also text).
-              <strong>What you must assume when reliability matters and you're out of the loop.</strong>
+              Rearranges what you put in.
+              <strong>What to assume when you're out of the loop.</strong>
             </p>
           </div>
         </div>
 
-        <p class="s8__coda">The skill is <em>calibration</em> &mdash; based on how tight your verification loop is.</p>
+        <p class="s8__coda">The skill is <em>calibration</em> &mdash; based on how closely you're watching.</p>
       </div>
 
-      <span class="stage__num"><strong>08</strong> &middot; 18</span>
+      <span class="stage__num"><strong>08</strong> &middot; 13</span>
       <div class="stage__footer">08 &middot; Bounds</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      The candidates were partial views — autocomplete is a primitive lower bound, intern is a primitive upper bound, parrot is the pessimistic floor-only view. These two bounds subsume what's right and discard what's wrong. You operate in between, calibrating by how tight your verification loop is.
+      The four candidates were partial views &mdash; autocomplete is a primitive lower bound, intern is a primitive upper bound, parrot is the pessimistic floor-only view, genie is the optimistic upper-bound that forgets you still carry intent. These two bounds subsume what's right and discard what's wrong. The "smart human" is a memory aid &mdash; flag the three deltas (forgets between sessions, can't read intent, parallelizable) so the analogy doesn't leak.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 9 · UPPER BOUND
+       SLIDE 8 · CALIBRATE
   ========================================================= -->
-  <section class="slide off-fly-right" data-slide="9">
+  <section class="slide off-zoom-near" data-slide="9">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 560px; top: -80px; right: -20px;">09</span>
-      <div class="vert-mark">Part II &middot; Upper Bound</div>
-
-      <div class="stage__bounds">
-        <p class="caption" style="margin-bottom: 16px;">&mdash; Upper bound &mdash;</p>
-
-        <div class="bound-page">
-          <div class="bound-page__left">
-            <h2 class="bound-page__title">A smart, knowledgeable <em>human</em> who doesn't know what you want or why, and has no body.</h2>
-            <p class="bound-page__meta">What the field is building toward. What AI approaches under tight verification loops.</p>
-            <hr class="bound-page__rule">
-            <p class="bound-page__use"><strong>Operate near this bound when</strong> you can verify each output before acting on it &mdash; brainstorming, debugging interactively, drafting RFCs.</p>
-            <p class="bound-page__use">Give it <em>what + why</em>. Hand it tools when accuracy matters &mdash; same as a human with a reference book.</p>
-          </div>
-
-          <div class="bound-page__right">
-            <div class="callout callout--green">
-              <span class="callout__label">Permanent property</span>
-              Even at the upper bound, AI cannot know your exact <em>what</em> and <em>why</em>. Articulating intent is a forever-skill &mdash; it doesn't shrink with model capability.
-            </div>
-
-            <div class="callout callout--accent">
-              <span class="callout__label">How the current upper bound falls short</span>
-              <ul>
-                <li><strong>Demand pushback.</strong> Sycophancy is the default.</li>
-                <li><strong>Verify facts.</strong> It confidently invents.</li>
-                <li><strong>Force clarifying questions.</strong> It plows ahead silently.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <span class="stage__num"><strong>09</strong> &middot; 18</span>
-      <div class="stage__footer">09 &middot; Upper Bound</div>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      Two layers. (1) The caveats aren't permanent — they're how the <em>current</em> approximation falls short. As models improve, these shrink. (2) The <em>what + why</em> property is structural — it doesn't shrink with model capability. No matter how smart AI gets, you carry the intent.
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 10 · LOWER BOUND
-  ========================================================= -->
-  <section class="slide slide--paper off-fly-left" data-slide="10">
-    <div class="stage">
-      <span class="ghost-num" style="font-size: 560px; top: -80px; left: -20px;">10</span>
-      <div class="vert-mark">Part II &middot; Lower Bound</div>
-
-      <div class="stage__bounds">
-        <p class="caption" style="margin-bottom: 16px;">&mdash; Lower bound &mdash;</p>
-
-        <div class="bound-page">
-          <div class="bound-page__left">
-            <h2 class="bound-page__title">A text-to-text <em>parser</em> with tool calls (tool calls are also text).</h2>
-            <p class="bound-page__meta">What you must assume when reliability matters and you're out of the loop.</p>
-            <hr class="bound-page__rule">
-            <p class="bound-page__use"><strong>Operate near this bound when</strong> you can't verify each output &mdash; production systems, autonomous workflows, anything running while you're absent.</p>
-          </div>
-
-          <div class="bound-page__right">
-            <div class="callout callout--green">
-              <span class="callout__label">Useful insights &mdash; even at the floor</span>
-              <ul>
-                <li>Give it <em>tools</em> to make non-deterministic, abstract decisions while you're absent. The floor is already useful.</li>
-                <li>You don't need the biggest, best, most expensive model. A small, cheap, even local model that understands your tools (e.g. parsing <code>grep</code> output) is enough to ship.</li>
-              </ul>
-            </div>
-
-            <div class="callout callout--accent">
-              <span class="callout__label">Caveat &mdash; three dials</span>
-              <ul>
-                <li>Narrower <strong>input</strong> &middot; less ambiguity.</li>
-                <li>Narrower <strong>output space</strong> &middot; schemas, formats.</li>
-                <li>Shorter <strong>output</strong> &middot; less drift.</li>
-              </ul>
-              <p style="margin: 8px 0 0; font-style: italic;">All three compound.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <span class="stage__num"><strong>10</strong> &middot; 18</span>
-      <div class="stage__footer">10 &middot; Lower Bound</div>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      Two implications of treating it as just a parser. (1) Agentic: floor-level AI plus tools plus constraints runs abstract decisions in production. (2) Cost: you stop chasing frontier models. The race for biggest model is a smart-human-mode habit; parser mode rewards "smallest model that gets the job done."
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 11 · CALIBRATE
-  ========================================================= -->
-  <section class="slide off-zoom-near" data-slide="11">
-    <div class="stage">
-      <span class="ghost-num" style="font-size: 540px; top: -80px; right: -10px;">11</span>
       <div class="vert-mark">Part II &middot; Calibrate</div>
 
       <div class="stage__bounds">
         <div class="s11__head">
           <p class="caption" style="margin-bottom: 12px;">&mdash; The skill is calibration &mdash;</p>
-          <h2 class="s11__title">Calibrate by how <em>tight</em> your verification loop is.</h2>
+          <h2 class="s11__title">Calibrate by how <em>closely</em> you're watching.</h2>
           <p class="s11__modes">
-            <strong>Tight loop</strong> (you check each output) &rarr; operate near the upper bound. &nbsp; <strong>No loop</strong> (autonomous in production) &rarr; operate near the lower bound.
+            <strong>Tight watch</strong> &rarr; smart person: give it <em>what + why</em>, hand it tools. &nbsp; <strong>No watch</strong> &rarr; parser: narrow inputs, narrow outputs, keep them short.
           </p>
-          <p class="s11__trigger">When something <em>surprises</em> you, you've miscalibrated. Recalibrate.</p>
+          <p class="s11__trigger">Surprise = miscalibration. Slide bounds.</p>
         </div>
 
         <div class="s11__grid">
           <div class="s11__head-cell">You assumed</div>
-          <div class="s11__head-cell">…and were surprised that</div>
+          <div class="s11__head-cell">&hellip;and were surprised that</div>
           <div class="s11__head-cell">Recalibrate toward</div>
 
           <div class="s11__cell s11__cell--key">Upper bound</div>
@@ -1691,284 +1603,179 @@
           <div class="s11__cell">Upper bound &mdash; explain the <em>why</em>.</div>
         </div>
 
-        <div class="callout callout--green" style="font-size: 16px;">
-          <span class="callout__label">Carry these alongside</span>
-          <ul>
-            <li>Even at the upper bound, AI can't know your exact <em>what + why</em> &mdash; articulate intent, always.</li>
-            <li>Even at the lower bound, tools + constraints make AI autonomously useful &mdash; build agentic systems now.</li>
-          </ul>
+        <div class="callout callout--green" style="font-size: 16px; margin-top: 18px;">
+          <span class="callout__label">Operative definition</span>
+          <strong>Context = <em>what</em> you want + <em>why</em> you want it.</strong> Everything else is a sub-question of one of those two.
         </div>
       </div>
 
-      <span class="stage__num"><strong>11</strong> &middot; 18</span>
-      <div class="stage__footer">11 &middot; Calibrate</div>
+      <span class="stage__num"><strong>09</strong> &middot; 13</span>
+      <div class="stage__footer">09 &middot; Calibrate</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      Notice the surprise, name which bound you were assuming, slide toward the other. The two action insights below the table are the takeaways the audience should leave with.
+      Notice the surprise, name which bound you were assuming, slide toward the other. The "context = what+why" line is the operative definition &mdash; when anyone says "give it more context," <em>what + why</em> is what they mean. Bring up METR's 2025 RCT here if it lands: developers predicted +20% speedup, measured &minus;19%. Every participant ran an uncalibrated model until measurement forced contact.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 12 · CONTEXT = WHAT + WHY
+       SLIDE 9 · PUSHBACK PAUSE 2
   ========================================================= -->
-  <section class="slide slide--paper off-card-flip" data-slide="12">
+  <section class="slide slide--deep off-tumble-cw" data-slide="10">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 800px; top: -140px; left: 50%; transform: translateX(-50%); opacity: 0.035;">12</span>
-      <div class="vert-mark">Part II &middot; Context</div>
-
-      <div class="stage__bounds" style="display: flex; align-items: center; justify-content: center;">
-        <div class="s12__poster">
-          <p class="caption" style="margin-bottom: 28px;">&mdash; The operative definition &mdash;</p>
-          <h2 class="s12__title">Context = <em>what</em> you want<br>+ <em>why</em> you want it.</h2>
-          <p class="s12__sub">Everything else &mdash; state, constraints, conventions, taste, examples &mdash; is a sub-question of one of those two.</p>
-          <p class="s12__permanence">
-            Even at the upper bound, AI cannot know these.<br>
-            You carry the intent &mdash; <span class="forever">forever</span>.
-          </p>
-        </div>
-      </div>
-
-      <span class="stage__num"><strong>12</strong> &middot; 18</span>
-      <div class="stage__footer">12 &middot; Context</div>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      This is the operative definition. When anyone says "give it more context" — <em>what + why</em> is what they mean. Whatever AI becomes, the <em>what + why</em> gap stays.
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 13 · PUSHBACK PAUSE 2
-  ========================================================= -->
-  <section class="slide slide--deep off-tumble-cw" data-slide="13">
-    <div class="stage">
-      <span class="ghost-num" style="font-size: 1100px; top: -180px; right: -160px; opacity: 0.025;">13</span>
-
       <div class="stage__bounds" style="display: flex; align-items: center; justify-content: center;">
         <div class="pause__wrap">
           <div class="pause__ornament">&#8258;</div>
-          <h2 class="pause__word">Pushback?</h2>
+          <h2 class="pause__word">Questions?</h2>
           <p class="pause__sub">Pause &middot; ~ 3 min</p>
         </div>
       </div>
 
-      <span class="stage__num"><strong>13</strong> &middot; 18</span>
-      <div class="stage__footer">13 &middot; Intermission</div>
+      <span class="stage__num"><strong>10</strong> &middot; 13</span>
+      <div class="stage__footer">10 &middot; Intermission</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      ~3 min. Most-likely pushback: "but X failure mode breaks your model." Steelman it, name which bound it lives under, refine in real time.
+      ~3 min. Most-likely pushback: "but X failure mode breaks your model." Steelman it, name which bound it lives under, refine in real time. This is the comparative-framing payoff &mdash; the model survives if you can name where the objection lives.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 14 · WORK
+       SLIDE 10 · THREE THINGS TO ACT ON TODAY
   ========================================================= -->
-  <section class="slide off-drop-sky" data-slide="14">
+  <section class="slide off-drop-sky" data-slide="11">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 580px; top: -90px; right: -20px;">14</span>
-      <div class="vert-mark">Part III &middot; Work</div>
+      <div class="vert-mark">Part III &middot; Today</div>
 
       <div class="stage__bounds">
         <div class="nl-head">
-          <p class="caption" style="margin-bottom: 12px;">&mdash; Consequences for your work &mdash;</p>
-          <h2 class="nl-title">What changes about your <em>work</em>.</h2>
+          <p class="caption" style="margin-bottom: 12px;">&mdash; What the model unlocks &mdash;</p>
+          <h2 class="nl-title">Three things you can act on <em>today</em>.</h2>
         </div>
 
         <ul class="nl-list">
           <li>
             <span class="nl-num">i</span>
             <div class="nl-body">
-              <strong>Intent articulation becomes a core engineering skill.</strong>
-              The <em>what + why</em> is the work; coding speed matters less.
+              <strong>Ship at the floor.</strong>
+              Small, cheap, or local + good tools + tight constraints already do production work. Stop waiting for the frontier.
             </div>
           </li>
           <li>
             <span class="nl-num">ii</span>
             <div class="nl-body">
-              <strong>Pushback discipline becomes hygiene.</strong>
-              Sycophancy is the default failure mode; you must demand challenge.
+              <strong>Expand the surface.</strong>
+              Anywhere a smart-human collaborator helps, AI does. Architecture, RFC review, postmortems, hiring rubrics, vendor evaluation, strategy.
             </div>
           </li>
           <li>
             <span class="nl-num">iii</span>
             <div class="nl-body">
-              <strong>Use cases expand beyond coding.</strong>
-              Architecture, RFC review, postmortems, comms drafts, code review, career thinking, strategy &mdash; anywhere a smart-human collaborator would help.
+              <strong>Hire and promote for specification + verification.</strong>
+              "Writes code fast" is no longer the premium. "Specifies intent clearly and verifies output rigorously" is.
             </div>
           </li>
         </ul>
       </div>
 
-      <span class="stage__num"><strong>14</strong> &middot; 18</span>
-      <div class="stage__footer">14 &middot; Your Work</div>
+      <span class="stage__num"><strong>11</strong> &middot; 13</span>
+      <div class="stage__footer">11 &middot; Today</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      The "more use cases" expansion is the practical lift. Most senior engineers cap AI at coding; the smart-human lens predicts it's useful anywhere brainstorming is.
+      Three direct consequences of the two-bounds model. (i) lower-bound implication: constraint substitutes for capability. Anecdote: smallest Gemma + a project-graph build of a codebase answered architecture questions correctly. (ii) upper-bound implication: smart-human lens predicts AI is useful wherever a smart peer would help. Anecdotes: Socratic physics tutoring; Rokomari founder market-share brainstorming. (iii) field-level shift derived from "intent articulation is the forever-skill" &mdash; changes who you hire, promote, develop.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 15 · FIELD
+       SLIDE 11 · FOREVER-SKILL + EVALS
   ========================================================= -->
-  <section class="slide slide--paper off-corner-bl" data-slide="15">
+  <section class="slide slide--paper off-card-flip" data-slide="12">
     <div class="stage">
-      <span class="ghost-num" style="font-size: 580px; top: -90px; left: -20px;">15</span>
-      <div class="vert-mark">Part III &middot; Field</div>
+      <div class="vert-mark">Part III &middot; Forever</div>
 
       <div class="stage__bounds">
-        <div class="nl-head">
-          <p class="caption" style="margin-bottom: 12px;">&mdash; Second-order consequences &mdash;</p>
-          <h2 class="nl-title">What changes about the <em>field</em>.</h2>
-        </div>
+        <p class="caption" style="margin-bottom: 16px;">&mdash; The one thing that doesn't shrink &mdash;</p>
 
-        <ul class="nl-list">
-          <li>
-            <span class="nl-num">i</span>
-            <div class="nl-body">
-              <strong>Hiring profile shifts toward specification + verification.</strong>
-              Not "writes code"; "specifies intent and verifies output."
+        <div class="bound-page">
+          <div class="bound-page__left">
+            <h2 class="bound-page__title">Articulating <em>what + why</em> is the forever-skill.</h2>
+            <hr class="bound-page__rule">
+            <p class="bound-page__use">
+              You write simple UIs because a teacher mentioned his grandma struggles with phones. Not in your repo. Not on your screen. <em>But in every interface you design.</em>
+            </p>
+            <p class="bound-page__use" style="margin-top: 14px;">
+              Your code has feature flags because a boss said over coffee that we don't ship on Fridays. AI reads your code. <em>It can't read the coffee break.</em>
+            </p>
+          </div>
+
+          <div class="bound-page__right">
+            <div class="callout callout--green">
+              <span class="callout__label">Permanent property</span>
+              Tacit context is <em>structurally</em> unobservable. Memory and screen-watching don't reach what you couldn't write down if asked.
             </div>
-          </li>
-          <li>
-            <span class="nl-num">ii</span>
-            <div class="nl-body">
-              <strong>Frameworks go schema-first, verification-first.</strong>
-              The next generation of tooling assumes structured I/O and runtime checks.
+
+            <div class="callout callout--accent">
+              <span class="callout__label">For people building AI products</span>
+              <strong>Evals are how <em>what + why</em> survives between sessions.</strong>
+              <ul>
+                <li>Concrete input/output examples: good vs. bad.</li>
+                <li>Without them, intent decays into vibes.</li>
+              </ul>
             </div>
-          </li>
-          <li>
-            <span class="nl-num">iii</span>
-            <div class="nl-body">
-              <strong>Comp curves bend for engineers who can drive AI well.</strong>
-              The premium moves from "fast coder" to "clear specifier."
-            </div>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
 
-      <span class="stage__num"><strong>15</strong> &middot; 18</span>
-      <div class="stage__footer">15 &middot; The Field</div>
+      <span class="stage__num"><strong>12</strong> &middot; 13</span>
+      <div class="stage__footer">12 &middot; Forever</div>
     </div>
     <div class="speaker-notes-content" data-notes>
-      Brief slide. Second-order consequences for the audience to chew on, not predictions to defend in detail.
+      The grandma/coffee-break example is the strongest single argument in the talk &mdash; tell it slowly. Polanyi 1966 ("we know more than we can tell") is the citation if anyone presses. Evals: cite Anthropic's <em>Demystifying Evals for AI Agents</em> and the OpenAI Cookbook's eval-driven design entry. METR's 2025 RCT (devs wrong about own productivity by ~40 percentage points) is the strongest argument for evals &mdash; self-assessment is unreliable.
     </div>
   </section>
 
   <!-- =========================================================
-       SLIDE 16 · GAP CLOSING
+       SLIDE 12 · MAINTENANCE + CLOSE (DARK)
   ========================================================= -->
-  <section class="slide off-tumble-ccw" data-slide="16">
-    <div class="stage">
-      <span class="ghost-num" style="font-size: 580px; top: -90px; right: 60px;">16</span>
-      <div class="vert-mark">Part III &middot; Maintenance</div>
-
-      <div class="stage__bounds">
-        <div class="nl-head">
-          <p class="caption" style="margin-bottom: 12px;">&mdash; The gap closing &mdash;</p>
-          <h2 class="nl-title">The <em>maintenance</em> schedule.</h2>
-          <p class="nl-sub">Signals that the upper bound's caveats are dissolving &mdash; the gap between bounds closing.</p>
-        </div>
-
-        <ul class="nl-list" style="gap: 22px;">
-          <li>
-            <span class="nl-num nl-num--small">&middot;</span>
-            <div class="nl-body" style="font-size: 20px; padding-top: 10px;">
-              If AI starts asking <strong style="display: inline; font-family: var(--display); font-size: 1.15em;">good clarifying questions</strong> by default &rarr; upper bound's first caveat dissolves.
-            </div>
-          </li>
-          <li>
-            <span class="nl-num nl-num--small">&middot;</span>
-            <div class="nl-body" style="font-size: 20px; padding-top: 10px;">
-              If <strong style="display: inline; font-family: var(--display); font-size: 1.15em;">persistent memory</strong> across sessions becomes default &rarr; upper bound gets closer to literal.
-            </div>
-          </li>
-          <li>
-            <span class="nl-num nl-num--small">&middot;</span>
-            <div class="nl-body" style="font-size: 20px; padding-top: 10px;">
-              If <strong style="display: inline; font-family: var(--display); font-size: 1.15em;">sycophancy is engineered out</strong> &rarr; user-side enforcement burden drops.
-            </div>
-          </li>
-        </ul>
-
-        <p class="nl-coda">
-          But the structural <em>what + why</em> limit at the upper bound stays.<br>You always carry the intent.
-        </p>
-      </div>
-
-      <span class="stage__num"><strong>16</strong> &middot; 18</span>
-      <div class="stage__footer">16 &middot; Maintenance</div>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      Most talks skip this slide. Including it is the comparative-framing move — you're not selling a thesis; you're handing them a tool with a service interval.
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 17 · MONDAY MORNING
-  ========================================================= -->
-  <section class="slide slide--paper off-spin" data-slide="17">
-    <div class="stage">
-      <span class="ghost-num" style="font-size: 580px; top: -90px; left: -10px;">17</span>
-      <div class="vert-mark">Part III &middot; Monday Morning</div>
-
-      <div class="stage__bounds">
-        <div class="nl-head">
-          <p class="caption" style="margin-bottom: 12px;">&mdash; This week &mdash;</p>
-          <h2 class="nl-title">Pick <em>one</em>. Do it this week.</h2>
-        </div>
-
-        <ul class="nl-list">
-          <li>
-            <span class="nl-num">01</span>
-            <div class="nl-body">
-              <strong>Audit your implicit model.</strong>
-              Spend 10 minutes writing what you currently assume about AI before your next prompt.
-            </div>
-          </li>
-          <li>
-            <span class="nl-num">02</span>
-            <div class="nl-body">
-              <strong>Pre-mortem your next session.</strong>
-              Write the <em>what</em>, the <em>why</em>, what you're <em>not</em> giving, and your prediction for the failure mode. Score yourself afterward.
-            </div>
-          </li>
-          <li>
-            <span class="nl-num">03</span>
-            <div class="nl-body">
-              <strong>Track sycophancy for one week.</strong>
-              Every time AI agrees with you, ask "would a competent skeptic have agreed?" Count the gap.
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <span class="stage__num"><strong>17</strong> &middot; 18</span>
-      <div class="stage__footer">17 &middot; Monday Morning</div>
-    </div>
-    <div class="speaker-notes-content" data-notes>
-      Pre-mortem is the strongest — smallest action that exercises the whole model in one session. Three is the cap.
-    </div>
-  </section>
-
-  <!-- =========================================================
-       SLIDE 18 · CLOSE
-  ========================================================= -->
-  <section class="slide slide--ink off-zoom-back-far" data-slide="18">
+  <section class="slide slide--ink off-zoom-back-far" data-slide="13">
     <div class="stage">
       <span class="ghost-num" style="font-size: 880px; top: -180px; right: -120px; color: var(--accent-soft); opacity: 0.1;">&infin;</span>
 
-      <div class="stage__bounds" style="display: flex; align-items: center; justify-content: center;">
-        <div class="s18__poster">
-          <div class="s18__ornament">&#8258;</div>
-          <h2 class="s18__title">The best working model<br>I've found <em>so far</em>.</h2>
-          <p class="s18__sub">Push back. Refine.<br>Replace it when it breaks.</p>
+      <div class="stage__bounds">
+        <div class="nl-head">
+          <p class="caption" style="margin-bottom: 12px; color: rgba(242, 235, 218, 0.55);">&mdash; What's wrong now. What dissolves. What doesn't. &mdash;</p>
+          <h2 class="nl-title" style="color: var(--bg); max-width: 26ch;">Hold the model <em style="color: #E8B5A8;">loosely</em>.</h2>
         </div>
+
+        <ul class="nl-list" style="gap: 22px;">
+          <li style="border-color: rgba(242, 235, 218, 0.18);">
+            <span class="nl-num nl-num--small" style="color: #E8B5A8;">&middot;</span>
+            <div class="nl-body" style="font-size: 19px; padding-top: 10px; color: rgba(242, 235, 218, 0.88);">
+              AI defaults to <strong style="display: inline; font-family: var(--display); font-size: 1.15em; color: var(--bg);">agreement</strong> (sycophancy) and to <strong style="display: inline; font-family: var(--display); font-size: 1.15em; color: var(--bg);">silent action</strong> on ambiguity. Pushback and clarifying questions must be demanded.
+            </div>
+          </li>
+          <li style="border-color: rgba(242, 235, 218, 0.18);">
+            <span class="nl-num nl-num--small" style="color: #E8B5A8;">&middot;</span>
+            <div class="nl-body" style="font-size: 19px; padding-top: 10px; color: rgba(242, 235, 218, 0.88);">
+              Hallucination, sycophancy, silent plowing &mdash; these <strong style="display: inline; font-family: var(--display); font-size: 1.15em; color: var(--bg);">dissolve</strong> with model capability. Plan for it.
+            </div>
+          </li>
+          <li style="border-color: rgba(242, 235, 218, 0.18);">
+            <span class="nl-num nl-num--small" style="color: #E8B5A8;">&middot;</span>
+            <div class="nl-body" style="font-size: 19px; padding-top: 10px; color: rgba(242, 235, 218, 0.88);">
+              The <strong style="display: inline; font-family: var(--display); font-size: 1.15em; color: var(--bg);">intent gap</strong> doesn't dissolve. That one is structural. You carry it forever.
+            </div>
+          </li>
+        </ul>
+
+        <p style="margin-top: 44px; font-family: var(--display); font-style: italic; font-size: 38px; line-height: 1.3; color: #E8B5A8; max-width: 60ch; text-align: center; padding-top: 28px; border-top: 1px solid rgba(232, 181, 168, 0.4);">
+          The model itself is <span style="text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 8px;">provisional</span>.<br>Push back. Refine. Replace it when it breaks.
+        </p>
       </div>
 
       <p class="s18__fin">fin</p>
-      <span class="stage__num" style="color: rgba(242, 235, 218, 0.5);"><strong style="color: #E8B5A8;">18</strong> &middot; 18</span>
+      <span class="stage__num" style="color: rgba(242, 235, 218, 0.5);"><strong style="color: #E8B5A8;">13</strong> &middot; 13</span>
     </div>
     <div class="speaker-notes-content" data-notes>
-      End on the comparative frame. The model isn't the point; keeping a conscious model is the point. Invite refinement explicitly.
+      Three beats, then the close. The dissolution-schedule slide dignifies skepticism: yes, things will change, here's how to update the model. The permanence of <em>what + why</em> is the durable through-line. End on the comparative frame &mdash; the model isn't the point; keeping a conscious model is. Invite refinement explicitly.
     </div>
   </section>
 
@@ -1982,7 +1789,7 @@
 
 <!-- HUD -->
 <div class="hud">
-  <span class="hud__progress"><strong id="hudCurrent">01</strong> &middot; 18</span>
+  <span class="hud__progress"><strong id="hudCurrent">01</strong> &middot; 13</span>
   <span class="hud__hint">&larr; &rarr; &middot; <span style="font-family: var(--mono); font-weight: 700;">N</span> notes &middot; <span style="font-family: var(--mono); font-weight: 700;">F</span> full</span>
 </div>
 
